@@ -1,0 +1,1462 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Hackathon AI Workflow Plan</title>
+    <style>
+      :root {
+        --ivory: #faf9f5;
+        --slate: #141413;
+        --clay: #d97757;
+        --clay-d: #b85c3e;
+        --oat: #e3dacc;
+        --olive: #788c5d;
+        --rust: #b04a3f;
+        --gray-100: #f6f3eb;
+        --gray-150: #f0eee6;
+        --gray-300: #d1cfc5;
+        --gray-500: #87867f;
+        --gray-700: #3d3d3a;
+        --white: #ffffff;
+        --serif: ui-serif, Georgia, "Times New Roman", serif;
+        --sans:
+          system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial,
+          sans-serif;
+        --mono: ui-monospace, "SF Mono", Menlo, Monaco, Consolas, monospace;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html {
+        scroll-behavior: smooth;
+      }
+      body {
+        margin: 0;
+        padding: 56px 24px 96px;
+        background: var(--ivory);
+        color: var(--gray-700);
+        font-family: var(--sans);
+        font-size: 15px;
+        line-height: 1.6;
+        -webkit-font-smoothing: antialiased;
+      }
+      .page {
+        width: 100%;
+        max-width: 1180px;
+        min-width: 0;
+        margin: 0 auto;
+      }
+      .eyebrow {
+        font-family: var(--mono);
+        font-size: 11px;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--gray-500);
+        margin-bottom: 10px;
+      }
+      h1,
+      h2,
+      h3 {
+        color: var(--slate);
+        font-family: var(--serif);
+        font-weight: 500;
+      }
+      h1 {
+        font-size: clamp(34px, 5vw, 52px);
+        line-height: 1.08;
+        letter-spacing: -0.02em;
+        margin: 0 0 14px;
+      }
+      h2 {
+        font-size: 26px;
+        letter-spacing: -0.01em;
+        margin: 0 0 12px;
+      }
+      h3 {
+        font-size: 20px;
+        margin: 0 0 8px;
+      }
+      p {
+        margin: 0 0 12px;
+      }
+      a {
+        color: var(--clay-d);
+        text-decoration-thickness: 1px;
+      }
+      code,
+      pre {
+        font-family: var(--mono);
+      }
+      code {
+        background: var(--gray-150);
+        border: 1px solid var(--gray-300);
+        border-radius: 5px;
+        padding: 1px 5px;
+        font-size: 0.92em;
+      }
+      pre {
+        max-width: 100%;
+        min-width: 0;
+        margin: 12px 0 0;
+        padding: 14px;
+        overflow-x: auto;
+        overflow-y: hidden;
+        white-space: pre;
+        background: #1e1f1d;
+        color: #f7f2e8;
+        border-radius: 10px;
+        border: 1.5px solid #111;
+        font-size: 13px;
+        line-height: 1.5;
+        -webkit-overflow-scrolling: touch;
+      }
+      pre code {
+        display: block;
+        width: max-content;
+        min-width: 100%;
+        background: transparent;
+        border: 0;
+        padding: 0;
+        color: inherit;
+        white-space: pre;
+      }
+      .lead {
+        max-width: 980px;
+        color: var(--gray-700);
+        margin: 0;
+        font-size: 17px;
+      }
+      .page-head {
+        width: 100%;
+        margin-bottom: 28px;
+      }
+      .panel {
+        min-width: 0;
+        background: var(--white);
+        border: 1.5px solid var(--gray-300);
+        border-radius: 14px;
+        box-shadow: 0 12px 32px rgba(20, 20, 19, 0.045);
+      }
+
+      .nav {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin: 22px 0 34px;
+      }
+      .nav a,
+      .chip {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 6px 10px;
+        border: 1.5px solid var(--gray-300);
+        border-radius: 999px;
+        background: var(--white);
+        color: var(--gray-700);
+        text-decoration: none;
+        font-size: 13px;
+      }
+      .chip.good {
+        border-color: rgba(120, 140, 93, 0.42);
+        background: rgba(120, 140, 93, 0.1);
+        color: #52643d;
+      }
+      .chip.warn {
+        border-color: rgba(217, 119, 87, 0.45);
+        background: rgba(217, 119, 87, 0.1);
+        color: #8c452f;
+      }
+      .chip.risk {
+        border-color: rgba(176, 74, 63, 0.45);
+        background: rgba(176, 74, 63, 0.1);
+        color: #7e342e;
+      }
+      section {
+        margin-top: 34px;
+      }
+      .grid {
+        display: grid;
+        gap: 14px;
+      }
+      .grid.cols-2 {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+      .grid.cols-3 {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+      .grid.cols-4 {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+      }
+      .card {
+        padding: 18px;
+      }
+      .card h3 {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+      .num {
+        display: inline-grid;
+        place-items: center;
+        width: 27px;
+        height: 27px;
+        border-radius: 999px;
+        background: var(--clay);
+        color: white;
+        font-family: var(--mono);
+        font-size: 12px;
+        font-weight: 700;
+        flex: 0 0 auto;
+      }
+      .muted {
+        color: var(--gray-500);
+      }
+      .callout {
+        border-left: 4px solid var(--clay);
+        padding: 12px 14px;
+        background: rgba(217, 119, 87, 0.09);
+        border-radius: 0 10px 10px 0;
+      }
+      .callout.good {
+        border-left-color: var(--olive);
+        background: rgba(120, 140, 93, 0.1);
+      }
+      .callout.risk {
+        border-left-color: var(--rust);
+        background: rgba(176, 74, 63, 0.09);
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 14px;
+      }
+      th,
+      td {
+        text-align: left;
+        vertical-align: top;
+        padding: 10px 12px;
+        border-bottom: 1px solid var(--gray-300);
+      }
+      th {
+        font-family: var(--mono);
+        font-size: 11px;
+        text-transform: uppercase;
+        letter-spacing: 0.07em;
+        color: var(--gray-500);
+        background: var(--gray-100);
+      }
+      tr:last-child td {
+        border-bottom: 0;
+      }
+      .table-wrap {
+        overflow-x: auto;
+      }
+      .timeline {
+        display: grid;
+        gap: 12px;
+      }
+      .step {
+        display: grid;
+        grid-template-columns: 132px minmax(0, 1fr);
+        gap: 16px;
+        padding: 18px;
+        position: relative;
+      }
+      .step > *,
+      .grid > * {
+        min-width: 0;
+      }
+      .time {
+        font-family: var(--mono);
+        font-size: 12px;
+        text-transform: uppercase;
+        color: var(--clay-d);
+        letter-spacing: 0.05em;
+      }
+      .skill-title {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        align-items: center;
+        margin-bottom: 8px;
+      }
+      .skill-title h3 {
+        margin: 0;
+      }
+      .done-list {
+        margin: 10px 0 0;
+        padding-left: 18px;
+      }
+      .done-list li {
+        margin: 4px 0;
+      }
+      details {
+        background: var(--white);
+        border: 1.5px solid var(--gray-300);
+        border-radius: 12px;
+        padding: 12px 14px;
+      }
+      details + details {
+        margin-top: 8px;
+      }
+      summary {
+        cursor: pointer;
+        color: var(--slate);
+        font-weight: 650;
+      }
+      .flow {
+        padding: 16px;
+      }
+      .flow svg {
+        width: 100%;
+        height: auto;
+        display: block;
+      }
+      .footer {
+        margin-top: 42px;
+        color: var(--gray-500);
+        font-size: 13px;
+      }
+      .checklist {
+        display: grid;
+        gap: 8px;
+        margin: 12px 0 0;
+      }
+      .check {
+        display: grid;
+        grid-template-columns: 24px 1fr;
+        gap: 8px;
+        align-items: start;
+        padding: 9px 10px;
+        border: 1px solid var(--gray-300);
+        border-radius: 10px;
+        background: var(--gray-100);
+      }
+      .box {
+        width: 16px;
+        height: 16px;
+        margin-top: 3px;
+        border: 1.5px solid var(--gray-500);
+        border-radius: 4px;
+        background: white;
+      }
+      @media (max-width: 900px) {
+        body {
+          padding: 32px 16px 72px;
+        }
+        .grid.cols-2,
+        .grid.cols-3,
+        .grid.cols-4 {
+          grid-template-columns: 1fr;
+        }
+        .step {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="page">
+      <header class="page-head">
+        <div class="eyebrow">CJ Hackathon · AI-assisted delivery plan</div>
+        <h1>
+          Use the local Claude skills to ship one demoable vertical slice.
+        </h1>
+        <p class="lead">
+          This workflow is tailored to the current starter: a pnpm/turbo
+          monorepo with a Fastify + Zod API in <code>apps/api</code>, a Next.js
+          16 App Router UI in <code>apps/web</code>, placeholder planning docs,
+          and seven project skills under <code>.claude/skills</code>.
+        </p>
+      </header>
+
+      <nav class="nav" aria-label="Plan navigation">
+        <a href="#preflight">Preflight</a>
+        <a href="#skill-map">Skill map</a>
+        <a href="#workflow">Step-by-step workflow</a>
+        <a href="#starter-fit">Starter-specific notes</a>
+        <a href="#final-check">Final readiness</a>
+      </nav>
+
+      <section id="preflight">
+        <div class="eyebrow">Phase 0 · before invoking skills</div>
+        <h2>Preflight the repo and define the source of truth.</h2>
+        <div class="cols-3 grid">
+          <article class="panel card">
+            <h3><span class="num">1</span>Confirm runtime</h3>
+            <p>
+              Use Node 20+ and pnpm. Install dependencies if needed, then run
+              the starter checks.
+            </p>
+            <pre><code>make install
+make test
+make build</code></pre>
+          </article>
+          <article class="panel card">
+            <h3><span class="num">2</span>Run the starter</h3>
+            <p>
+              Open two terminals and verify the placeholder demo works before
+              replacing it.
+            </p>
+            <pre><code>make dev-node   # API on :8080
+make dev-web    # UI on :3000
+make smoke      # with API running</code></pre>
+          </article>
+          <article class="panel card">
+            <h3><span class="num">3</span>Lock the rule</h3>
+            <p>
+              One working vertical slice beats many partial features. Log
+              assumptions in <code>docs/problem-brief.md</code> unless they
+              involve secrets, safety, or external access.
+            </p>
+          </article>
+        </div>
+        <div class="callout risk" style="margin-top: 14px">
+          <strong
+            >If the starter or skills are missing in another clone:</strong
+          >
+          ask for the missing path before applying this plan. In this workspace,
+          both the starter files and <code>.claude/skills</code> are present, so
+          no clarification is required.
+        </div>
+      </section>
+
+      <section id="skill-map">
+        <div class="eyebrow">Local skills · dependency map</div>
+        <h2>
+          Use each skill at the point where its output becomes the next input.
+        </h2>
+        <div class="panel flow" aria-label="Skill flow diagram">
+          <svg
+            viewBox="0 0 1120 280"
+            role="img"
+            aria-labelledby="flow-title flow-desc"
+          >
+            <title id="flow-title">Hackathon skills flow</title>
+            <desc id="flow-desc">
+              Problem framer creates the brief, solution architect creates
+              architecture, API contract pins endpoints, task slicer creates
+              tasks, implement vertical slice builds code, test fast verifies
+              it, demo story creates the final presentation.
+            </desc>
+            <defs>
+              <marker
+                id="arrow"
+                markerWidth="10"
+                markerHeight="10"
+                refX="8"
+                refY="3"
+                orient="auto"
+                markerUnits="strokeWidth"
+              >
+                <path d="M0,0 L0,6 L9,3 z" fill="#b85c3e" />
+              </marker>
+              <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+                <feDropShadow
+                  dx="0"
+                  dy="5"
+                  stdDeviation="5"
+                  flood-color="#141413"
+                  flood-opacity="0.12"
+                />
+              </filter>
+            </defs>
+            <rect
+              x="10"
+              y="20"
+              width="154"
+              height="70"
+              rx="14"
+              fill="#fff"
+              stroke="#d1cfc5"
+              stroke-width="2"
+              filter="url(#shadow)"
+            />
+            <text
+              x="87"
+              y="50"
+              text-anchor="middle"
+              font-family="ui-serif, Georgia"
+              font-size="18"
+              fill="#141413"
+            >
+              problem-framer
+            </text>
+            <text
+              x="87"
+              y="72"
+              text-anchor="middle"
+              font-family="monospace"
+              font-size="11"
+              fill="#87867f"
+            >
+              problem-brief.md
+            </text>
+
+            <rect
+              x="206"
+              y="20"
+              width="164"
+              height="70"
+              rx="14"
+              fill="#fff"
+              stroke="#d1cfc5"
+              stroke-width="2"
+              filter="url(#shadow)"
+            />
+            <text
+              x="288"
+              y="50"
+              text-anchor="middle"
+              font-family="ui-serif, Georgia"
+              font-size="18"
+              fill="#141413"
+            >
+              solution-architect
+            </text>
+            <text
+              x="288"
+              y="72"
+              text-anchor="middle"
+              font-family="monospace"
+              font-size="11"
+              fill="#87867f"
+            >
+              architecture.md
+            </text>
+
+            <rect
+              x="412"
+              y="20"
+              width="146"
+              height="70"
+              rx="14"
+              fill="#fff"
+              stroke="#d1cfc5"
+              stroke-width="2"
+              filter="url(#shadow)"
+            />
+            <text
+              x="485"
+              y="50"
+              text-anchor="middle"
+              font-family="ui-serif, Georgia"
+              font-size="18"
+              fill="#141413"
+            >
+              api-contract
+            </text>
+            <text
+              x="485"
+              y="72"
+              text-anchor="middle"
+              font-family="monospace"
+              font-size="11"
+              fill="#87867f"
+            >
+              api-contract.md
+            </text>
+
+            <rect
+              x="600"
+              y="20"
+              width="132"
+              height="70"
+              rx="14"
+              fill="#fff"
+              stroke="#d1cfc5"
+              stroke-width="2"
+              filter="url(#shadow)"
+            />
+            <text
+              x="666"
+              y="50"
+              text-anchor="middle"
+              font-family="ui-serif, Georgia"
+              font-size="18"
+              fill="#141413"
+            >
+              task-slicer
+            </text>
+            <text
+              x="666"
+              y="72"
+              text-anchor="middle"
+              font-family="monospace"
+              font-size="11"
+              fill="#87867f"
+            >
+              task-board.md
+            </text>
+
+            <rect
+              x="774"
+              y="20"
+              width="178"
+              height="70"
+              rx="14"
+              fill="#fff"
+              stroke="#d1cfc5"
+              stroke-width="2"
+              filter="url(#shadow)"
+            />
+            <text
+              x="863"
+              y="50"
+              text-anchor="middle"
+              font-family="ui-serif, Georgia"
+              font-size="18"
+              fill="#141413"
+            >
+              implement slice
+            </text>
+            <text
+              x="863"
+              y="72"
+              text-anchor="middle"
+              font-family="monospace"
+              font-size="11"
+              fill="#87867f"
+            >
+              API + UI + test
+            </text>
+
+            <rect
+              x="994"
+              y="20"
+              width="116"
+              height="70"
+              rx="14"
+              fill="#fff"
+              stroke="#d1cfc5"
+              stroke-width="2"
+              filter="url(#shadow)"
+            />
+            <text
+              x="1052"
+              y="50"
+              text-anchor="middle"
+              font-family="ui-serif, Georgia"
+              font-size="18"
+              fill="#141413"
+            >
+              test-fast
+            </text>
+            <text
+              x="1052"
+              y="72"
+              text-anchor="middle"
+              font-family="monospace"
+              font-size="11"
+              fill="#87867f"
+            >
+              test-plan.md
+            </text>
+
+            <line
+              x1="166"
+              y1="55"
+              x2="198"
+              y2="55"
+              stroke="#b85c3e"
+              stroke-width="2.5"
+              marker-end="url(#arrow)"
+            />
+            <line
+              x1="372"
+              y1="55"
+              x2="404"
+              y2="55"
+              stroke="#b85c3e"
+              stroke-width="2.5"
+              marker-end="url(#arrow)"
+            />
+            <line
+              x1="560"
+              y1="55"
+              x2="592"
+              y2="55"
+              stroke="#b85c3e"
+              stroke-width="2.5"
+              marker-end="url(#arrow)"
+            />
+            <line
+              x1="734"
+              y1="55"
+              x2="766"
+              y2="55"
+              stroke="#b85c3e"
+              stroke-width="2.5"
+              marker-end="url(#arrow)"
+            />
+            <line
+              x1="954"
+              y1="55"
+              x2="986"
+              y2="55"
+              stroke="#b85c3e"
+              stroke-width="2.5"
+              marker-end="url(#arrow)"
+            />
+
+            <path
+              d="M1052 96 C1052 178 860 196 666 128"
+              fill="none"
+              stroke="#788c5d"
+              stroke-width="2.5"
+              stroke-dasharray="6 7"
+              marker-end="url(#arrow)"
+            />
+            <text
+              x="877"
+              y="184"
+              text-anchor="middle"
+              font-family="monospace"
+              font-size="12"
+              fill="#52643d"
+            >
+              iterate only if the first slice is already demoable
+            </text>
+
+            <rect
+              x="432"
+              y="194"
+              width="256"
+              height="62"
+              rx="14"
+              fill="#fff"
+              stroke="#d1cfc5"
+              stroke-width="2"
+              filter="url(#shadow)"
+            />
+            <text
+              x="560"
+              y="220"
+              text-anchor="middle"
+              font-family="ui-serif, Georgia"
+              font-size="18"
+              fill="#141413"
+            >
+              demo-story
+            </text>
+            <text
+              x="560"
+              y="242"
+              text-anchor="middle"
+              font-family="monospace"
+              font-size="11"
+              fill="#87867f"
+            >
+              demo-script.md + pitch.md
+            </text>
+            <path
+              d="M1052 96 C992 176 742 202 696 220"
+              fill="none"
+              stroke="#b85c3e"
+              stroke-width="2.5"
+              marker-end="url(#arrow)"
+            />
+          </svg>
+        </div>
+
+        <div class="table-wrap panel" style="margin-top: 14px">
+          <table>
+            <thead>
+              <tr>
+                <th>Skill</th>
+                <th>Use when</th>
+                <th>Input</th>
+                <th>Output / done check</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>/problem-framer</code></td>
+                <td>At the very start or whenever the challenge is fuzzy.</td>
+                <td>Official challenge, constraints, judging scorecard.</td>
+                <td>
+                  <code>docs/problem-brief.md</code> filled with user, pain,
+                  proof metric, scope, assumptions, and wow moment.
+                </td>
+              </tr>
+              <tr>
+                <td><code>/solution-architect</code></td>
+                <td>After the brief, before any route or component changes.</td>
+                <td>Problem brief and MVP focus.</td>
+                <td>
+                  <code>docs/architecture.md</code> names components, request
+                  flow, data model, env vars, production path, and riskiest
+                  component.
+                </td>
+              </tr>
+              <tr>
+                <td><code>/api-contract</code></td>
+                <td>
+                  After architecture, before backend and frontend
+                  implementation.
+                </td>
+                <td>Feature/entity name and request flow.</td>
+                <td>
+                  <code>docs/api-contract.md</code> pins minimal endpoint
+                  shapes, Zod rules, JSON errors, examples, and frontend fetch
+                  notes.
+                </td>
+              </tr>
+              <tr>
+                <td><code>/task-slicer</code></td>
+                <td>Before implementation and whenever scope grows.</td>
+                <td>Available hours, team size, judging criteria.</td>
+                <td>
+                  <code>docs/task-board.md</code> has Now / Next / Later / Cut,
+                  with first task as a full vertical slice.
+                </td>
+              </tr>
+              <tr>
+                <td><code>/implement-vertical-slice</code></td>
+                <td>Manual invocation for one user-visible slice.</td>
+                <td>Slice name from task board.</td>
+                <td>
+                  Smallest code changes across API, UI, and focused test;
+                  reports files changed and verification results.
+                </td>
+              </tr>
+              <tr>
+                <td><code>/test-fast</code></td>
+                <td>After each slice and before the final demo freeze.</td>
+                <td>Changed files or risk area.</td>
+                <td>
+                  <code>docs/test-plan.md</code> updated;
+                  <code>make test</code>, <code>make build</code>, and smoke
+                  status reported.
+                </td>
+              </tr>
+              <tr>
+                <td><code>/demo-story</code></td>
+                <td>Final third of the hackathon or when rehearsing.</td>
+                <td>
+                  Demo length, judging rubric, working slice, proof metric.
+                </td>
+                <td>
+                  <code>docs/demo-script.md</code> and
+                  <code>docs/pitch.md</code> contain the hook, live flow,
+                  fallback, Q&amp;A, and next ask.
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section id="workflow">
+        <div class="eyebrow">Action plan · setup to completion</div>
+        <h2>Step-by-step developer guideline</h2>
+        <div class="timeline">
+          <article class="panel step">
+            <div class="time">0. Setup gate</div>
+            <div>
+              <div class="skill-title">
+                <h3>Baseline the starter before changing it</h3>
+                <span class="chip good">No skill yet</span>
+              </div>
+              <p>
+                Run the starter as-is so later failures are attributable to your
+                changes, not the template.
+              </p>
+              <pre><code>make install
+make test
+make build
+make dev-node   # terminal A
+make dev-web    # terminal B
+make smoke      # terminal C, API must be running</code></pre>
+              <ul class="done-list">
+                <li>
+                  If install/test/build fails, fix only the blocker required to
+                  run the starter.
+                </li>
+                <li>
+                  Do not add product scope until
+                  <code>/problem-framer</code> captures the official challenge.
+                </li>
+              </ul>
+            </div>
+          </article>
+
+          <article class="panel step">
+            <div class="time">1. Frame</div>
+            <div>
+              <div class="skill-title">
+                <h3>
+                  Use <code>/problem-framer</code> to choose the winning problem
+                </h3>
+                <span class="chip warn">Docs first</span>
+              </div>
+              <p>
+                <strong>When:</strong> immediately after receiving the
+                challenge, or any time the team is debating “what are we
+                actually building?”
+              </p>
+              <p>
+                <strong>How:</strong> provide the official challenge text, time
+                budget, known constraints, and ask it to use
+                <code>docs/judging-scorecard.md</code>.
+              </p>
+              <pre><code>/problem-framer "Challenge: &lt;paste official challenge&gt;. Time budget: &lt;hours&gt;. Team: &lt;people&gt;. Use docs/judging-scorecard.md and protect a single end-to-end MVP slice."</code></pre>
+              <ul class="done-list">
+                <li>
+                  Confirm <code>docs/problem-brief.md</code> has no empty
+                  headers.
+                </li>
+                <li>
+                  Demand a demo proof metric that can appear on screen in
+                  seconds.
+                </li>
+                <li>
+                  Record assumptions instead of blocking, except for safety,
+                  secrets, or external-system access.
+                </li>
+              </ul>
+            </div>
+          </article>
+
+          <article class="panel step">
+            <div class="time">2. Design</div>
+            <div>
+              <div class="skill-title">
+                <h3>
+                  Use <code>/solution-architect</code> to pin the fastest
+                  production-shaped architecture
+                </h3>
+                <span class="chip warn">No code yet</span>
+              </div>
+              <p>
+                <strong>When:</strong> after the problem brief is accepted and
+                before changing routes, storage, or UI.
+              </p>
+              <p>
+                <strong>How:</strong> ask for a design within the starter stack:
+                Fastify 5 + Zod 4 API, Next.js 16 App Router, Tailwind v4,
+                pnpm/turbo.
+              </p>
+              <pre><code>/solution-architect "Use docs/problem-brief.md. Design only the MVP vertical slice. Prefer in-memory storage behind a module interface; no new dependency unless it removes real demo risk."</code></pre>
+              <ul class="done-list">
+                <li>
+                  Check <code>docs/architecture.md</code> has components,
+                  request flow, data model, config/secrets, production path, and
+                  tradeoffs.
+                </li>
+                <li>
+                  Name the riskiest component to build first; this informs the
+                  first task.
+                </li>
+                <li>
+                  For frontend work, remember <code>apps/web/CLAUDE.md</code>:
+                  read local Next.js 16 docs under
+                  <code>node_modules/next/dist/docs/</code> when unsure.
+                </li>
+              </ul>
+            </div>
+          </article>
+
+          <article class="panel step">
+            <div class="time">3. Contract</div>
+            <div>
+              <div class="skill-title">
+                <h3>
+                  Use <code>/api-contract</code> to remove backend/frontend
+                  guesswork
+                </h3>
+                <span class="chip risk">Demo wiring risk</span>
+              </div>
+              <p>
+                <strong>When:</strong> after architecture, before backend and
+                frontend work start in parallel.
+              </p>
+              <p>
+                <strong>How:</strong> give the main entity or feature name. Keep
+                the contract minimal: every response field must be rendered by
+                the UI.
+              </p>
+              <pre><code>/api-contract "&lt;feature/entity name&gt; for the first MVP slice. Include only endpoints needed for the live demo, JSON error shape, Zod rules, examples, and frontend fetch notes."</code></pre>
+              <ul class="done-list">
+                <li>Ensure <code>GET /healthz</code> remains documented.</li>
+                <li>
+                  Replace or remove starter-only endpoint notes that do not
+                  exist in current <code>apps/api/src/server.ts</code>.
+                </li>
+                <li>
+                  List exactly three tests for <code>/test-fast</code>: happy
+                  path, validation error, and empty/not-found state.
+                </li>
+              </ul>
+            </div>
+          </article>
+
+          <article class="panel step">
+            <div class="time">4. Slice</div>
+            <div>
+              <div class="skill-title">
+                <h3>Use <code>/task-slicer</code> to defend the deadline</h3>
+                <span class="chip good">Cut list required</span>
+              </div>
+              <p>
+                <strong>When:</strong> once the contract exists, and again
+                whenever new ideas threaten the demo path.
+              </p>
+              <p>
+                <strong>How:</strong> pass real remaining time, team size, and
+                any judging criteria. Force the first task to be UI → API →
+                proof metric, even if ugly.
+              </p>
+              <pre><code>/task-slicer "Remaining time: &lt;hours&gt;. Team size: &lt;people&gt;. Use docs/problem-brief.md, docs/architecture.md, docs/api-contract.md, and docs/judging-scorecard.md. First task must be a complete vertical slice."</code></pre>
+              <ul class="done-list">
+                <li>
+                  Every task has outcome, likely files, acceptance check,
+                  effort, owner, and cut decision.
+                </li>
+                <li>
+                  The first task is runnable via
+                  <code>/implement-vertical-slice "&lt;slice name&gt;"</code>.
+                </li>
+                <li>
+                  Move Should-ship items to Cut the moment the first slice is at
+                  risk.
+                </li>
+              </ul>
+            </div>
+          </article>
+
+          <article class="panel step">
+            <div class="time">5. Build</div>
+            <div>
+              <div class="skill-title">
+                <h3>
+                  Use <code>/implement-vertical-slice</code> for exactly one
+                  slice
+                </h3>
+                <span class="chip risk">Manual code edits</span>
+              </div>
+              <p>
+                <strong>When:</strong> only after docs are ready and the task
+                board names the first slice. This skill edits code, so keep the
+                argument precise.
+              </p>
+              <p>
+                <strong>How:</strong> ask it to touch the smallest file set,
+                starting backend-first, then test, then UI. For this starter,
+                the replaceable demo files are:
+              </p>
+              <pre><code>apps/api/src/lib/store.ts
+apps/api/src/lib/ideas.ts
+apps/api/src/server.ts      # replace /api/ideas routes with real slice routes
+apps/api/src/ideas.test.ts  # rename/replace with real route tests
+apps/web/app/page.tsx
+apps/web/lib/api.ts
+.env.example                # mirror any new env var, placeholders only</code></pre>
+              <pre><code>/implement-vertical-slice "&lt;first slice name from docs/task-board.md&gt;"</code></pre>
+              <ul class="done-list">
+                <li>
+                  Backend: route in <code>server.ts</code>, Zod
+                  <code>safeParse</code>, JSON error shape, no hardcoded
+                  secrets.
+                </li>
+                <li>
+                  Test: vitest against <code>buildServer()</code>, covering
+                  happy path and validation failure.
+                </li>
+                <li>
+                  Frontend: headline, value proposition, primary action, results
+                  area, proof metric, plus loading/empty/success/error states.
+                </li>
+                <li>
+                  Verification: run <code>make test</code>, then
+                  <code>make build</code>, then click the primary workflow with
+                  both dev servers running.
+                </li>
+                <li>
+                  Report files changed, actual command results, one remaining
+                  risk, and update <code>docs/task-board.md</code>.
+                </li>
+              </ul>
+            </div>
+          </article>
+
+          <article class="panel step">
+            <div class="time">6. Verify</div>
+            <div>
+              <div class="skill-title">
+                <h3>
+                  Use <code>/test-fast</code> immediately after each slice
+                </h3>
+                <span class="chip good">Prevent demo embarrassment</span>
+              </div>
+              <p>
+                <strong>When:</strong> after implementation, before starting the
+                next feature, and again at final freeze.
+              </p>
+              <p>
+                <strong>How:</strong> focus on the critical journey, API
+                validation, typecheck/build, and smoke test. Update
+                <code>scripts/smoke-test.sh</code> if the reference idea routes
+                are replaced.
+              </p>
+              <pre><code>/test-fast "&lt;slice name or highest-risk area&gt;. Verify docs/api-contract.md matches the implemented API and update docs/test-plan.md."</code></pre>
+              <ul class="done-list">
+                <li>
+                  Run <code>make test</code> first; it should exercise Fastify
+                  via <code>buildServer()</code>.
+                </li>
+                <li>
+                  Run <code>make build</code> to catch TypeScript and Next build
+                  issues.
+                </li>
+                <li>
+                  Start API with <code>make dev-node</code>, then run
+                  <code>make smoke</code> against the current real endpoints.
+                </li>
+                <li>
+                  Document untested areas and whether they are true demo risks.
+                </li>
+              </ul>
+            </div>
+          </article>
+
+          <article class="panel step">
+            <div class="time">7. Iterate or cut</div>
+            <div>
+              <div class="skill-title">
+                <h3>Repeat only after the first slice is showable</h3>
+                <span class="chip warn">Scope control</span>
+              </div>
+              <p>
+                If there is time after a verified slice, choose the next highest
+                judge-visible item from <code>docs/task-board.md</code>. If the
+                board is stale, rerun <code>/task-slicer</code> with the
+                remaining time.
+              </p>
+              <pre><code>/task-slicer "Remaining time: &lt;hours left&gt;. First slice is working. Re-rank Next/Later/Cut by judge-visible ROI and preserve final presentation time."</code></pre>
+              <ul class="done-list">
+                <li>
+                  Prefer polish that makes value obvious over hidden technical
+                  expansion.
+                </li>
+                <li>
+                  Do not start a feature that cannot pass
+                  <code>/test-fast</code> before the demo freeze.
+                </li>
+                <li>
+                  Take screenshots or a short screen recording after every
+                  working checkpoint.
+                </li>
+              </ul>
+            </div>
+          </article>
+
+          <article class="panel step">
+            <div class="time">8. Story</div>
+            <div>
+              <div class="skill-title">
+                <h3>Use <code>/demo-story</code> in the final third</h3>
+                <span class="chip good">Presentation wins</span>
+              </div>
+              <p>
+                <strong>When:</strong> as soon as there is a working path; do
+                not wait until the last minutes.
+              </p>
+              <p>
+                <strong>How:</strong> give the demo slot length and ask it to
+                tie the live flow to the proof metric and scorecard.
+              </p>
+              <pre><code>/demo-story "Demo length: &lt;minutes&gt;. Use docs/problem-brief.md, docs/architecture.md, docs/judging-scorecard.md, and the verified working slice. Include fallback plan and judge Q&amp;A."</code></pre>
+              <ul class="done-list">
+                <li>
+                  <code>docs/demo-script.md</code> opens with a 10-second hook:
+                  user, pain, value, proof metric.
+                </li>
+                <li>
+                  <code>docs/pitch.md</code> has one-liner, demo proof, company
+                  impact, production credibility, and pilot ask.
+                </li>
+                <li>
+                  Rehearse against security, scalability, adoption, and
+                  data-quality questions.
+                </li>
+              </ul>
+            </div>
+          </article>
+
+          <article class="panel step">
+            <div class="time">9. Freeze</div>
+            <div>
+              <div class="skill-title">
+                <h3>Stop building and lock the demo path</h3>
+                <span class="chip risk">No broad refactors</span>
+              </div>
+              <p>
+                In final hardening, fix only the highest-impact blockers. Keep
+                one browser tab, one API terminal, one UI terminal, and one
+                fallback recording ready.
+              </p>
+              <pre><code>make test
+make build
+make dev-node
+make dev-web
+make smoke</code></pre>
+              <ul class="done-list">
+                <li>Fresh browser load works.</li>
+                <li>Primary action works end to end.</li>
+                <li>Proof metric is visible without explanation.</li>
+                <li>Error/empty states are not embarrassing.</li>
+                <li>Fallback screenshot/recording is available locally.</li>
+              </ul>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section id="starter-fit">
+        <div class="eyebrow">Starter-specific operating notes</div>
+        <h2>Use the template’s seams instead of refactoring around them.</h2>
+        <div class="cols-2 grid">
+          <article class="panel card">
+            <h3>Backend seam</h3>
+            <p>
+              <code>apps/api/src/server.ts</code> exports
+              <code>buildServer()</code>. Keep it that way so vitest can
+              exercise routes with <code>app.inject()</code> without booting a
+              port.
+            </p>
+            <p>
+              Domain schemas and in-memory data can live under
+              <code>apps/api/src/lib/</code>. If storage is module-level, export
+              a test-only reset helper and call it in <code>afterEach</code>.
+            </p>
+          </article>
+          <article class="panel card">
+            <h3>Frontend seam</h3>
+            <p>
+              <code>apps/web/app/page.tsx</code> is currently a client component
+              for the reference idea board. Replace it with a
+              10-second-understandable workflow: headline, value proposition,
+              primary action, results, and proof metric.
+            </p>
+            <p>
+              Keep fetch helpers in <code>apps/web/lib/api.ts</code>. Read
+              <code>NEXT_PUBLIC_API_URL</code> and render API error messages in
+              the error state.
+            </p>
+          </article>
+          <article class="panel card">
+            <h3>Docs seam</h3>
+            <p>
+              The existing docs are intentionally draft placeholders. Treat
+              these files as the handoff contract between skills:
+            </p>
+            <p>
+              <code>docs/problem-brief.md</code>,
+              <code>docs/architecture.md</code>,
+              <code>docs/api-contract.md</code>,
+              <code>docs/task-board.md</code>, <code>docs/test-plan.md</code>,
+              <code>docs/demo-script.md</code>, and <code>docs/pitch.md</code>.
+            </p>
+          </article>
+          <article class="panel card">
+            <h3>Verification seam</h3>
+            <p>
+              <code>make test</code> runs API tests and web typecheck when
+              dependencies exist. <code>make build</code> builds API and UI.
+              <code>make smoke</code> curls the running API.
+            </p>
+            <p>
+              After replacing <code>/api/ideas</code>, update
+              <code>scripts/smoke-test.sh</code> so smoke checks follow the real
+              demo path, not the starter route.
+            </p>
+          </article>
+        </div>
+
+        <div class="cols-2 grid" style="margin-top: 14px">
+          <div class="panel card">
+            <h3>Default team split</h3>
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Owner</th>
+                    <th>Best use</th>
+                    <th>Primary files</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><code>backend-node</code></td>
+                    <td>Fastify routes, Zod, JSON errors, vitest.</td>
+                    <td><code>apps/api/src/**</code></td>
+                  </tr>
+                  <tr>
+                    <td><code>frontend-nextjs</code></td>
+                    <td>Next.js 16 UI, four states, API integration.</td>
+                    <td>
+                      <code>apps/web/app/**</code>, <code>apps/web/lib/**</code>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td><code>qa-engineer</code></td>
+                    <td>
+                      <code>/test-fast</code> pass and demo-risk reporting.
+                    </td>
+                    <td>tests, smoke script, <code>docs/test-plan.md</code></td>
+                  </tr>
+                  <tr>
+                    <td><code>product-strategist</code></td>
+                    <td>Scope cuts and scorecard pressure-test.</td>
+                    <td>planning docs</td>
+                  </tr>
+                  <tr>
+                    <td><code>pitch-coach</code></td>
+                    <td>Rehearsal after <code>/demo-story</code>.</td>
+                    <td>
+                      <code>docs/demo-script.md</code>,
+                      <code>docs/pitch.md</code>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="panel card">
+            <h3>Rules that override enthusiasm</h3>
+            <div class="checklist">
+              <div class="check">
+                <span class="box"></span
+                ><span
+                  >Do not read or expose real secrets. Use
+                  <code>.env.example</code> placeholders.</span
+                >
+              </div>
+              <div class="check">
+                <span class="box"></span
+                ><span
+                  >Do not add dependencies unless they remove meaningful risk or
+                  save major time.</span
+                >
+              </div>
+              <div class="check">
+                <span class="box"></span
+                ><span
+                  >Do not build hidden infrastructure unless it unblocks the
+                  demo or production credibility.</span
+                >
+              </div>
+              <div class="check">
+                <span class="box"></span
+                ><span
+                  >Do not start feature two until feature one is working end to
+                  end.</span
+                >
+              </div>
+              <div class="check">
+                <span class="box"></span
+                ><span
+                  >Always end implementation with verification and doc
+                  updates.</span
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="final-check">
+        <div class="eyebrow">Completion gate</div>
+        <h2>Ship only when these are true.</h2>
+        <div class="cols-3 grid">
+          <article class="panel card">
+            <h3>Product</h3>
+            <div class="checklist">
+              <div class="check">
+                <span class="box"></span
+                ><span
+                  >User and pain are specific in
+                  <code>docs/problem-brief.md</code>.</span
+                >
+              </div>
+              <div class="check">
+                <span class="box"></span
+                ><span>Proof metric is visible in the UI.</span>
+              </div>
+              <div class="check">
+                <span class="box"></span
+                ><span>Cut list is explicit and accepted.</span>
+              </div>
+            </div>
+          </article>
+          <article class="panel card">
+            <h3>Code</h3>
+            <div class="checklist">
+              <div class="check">
+                <span class="box"></span
+                ><span>API contract matches implementation.</span>
+              </div>
+              <div class="check">
+                <span class="box"></span
+                ><span>Happy path and validation failure are tested.</span>
+              </div>
+              <div class="check">
+                <span class="box"></span
+                ><span
+                  ><code>make test</code>, <code>make build</code>, and
+                  <code>make smoke</code> pass or failures are consciously
+                  demo-safe.</span
+                >
+              </div>
+            </div>
+          </article>
+          <article class="panel card">
+            <h3>Demo</h3>
+            <div class="checklist">
+              <div class="check">
+                <span class="box"></span
+                ><span>Script fits the allocated time.</span>
+              </div>
+              <div class="check">
+                <span class="box"></span
+                ><span>Fallback recording or screenshots are ready.</span>
+              </div>
+              <div class="check">
+                <span class="box"></span
+                ><span
+                  >Q&amp;A covers security, scalability, adoption, and data
+                  quality.</span
+                >
+              </div>
+            </div>
+          </article>
+        </div>
+
+        <details style="margin-top: 14px">
+          <summary>
+            Minimal end-to-end command sequence for final freeze
+          </summary>
+          <pre><code>make test
+make build
+make dev-node   # keep running
+make dev-web    # keep running
+make smoke
+# Then manually click the exact demo path once from a fresh browser tab.</code></pre>
+        </details>
+      </section>
+
+      <footer class="footer">
+        <p>
+          Source context used: <code>README.md</code>, <code>Makefile</code>,
+          <code>apps/api/src/server.ts</code>,
+          <code>apps/web/app/page.tsx</code>, <code>apps/web/lib/api.ts</code>,
+          <code>apps/web/CLAUDE.md</code>, <code>docs/*.md</code>, and all
+          <code>.claude/skills/*/SKILL.md</code> files in this workspace.
+        </p>
+      </footer>
+    </main>
+  </body>
+</html>

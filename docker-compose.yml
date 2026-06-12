@@ -1,0 +1,84 @@
+# Bring up the whole stack:  docker compose up --build
+#
+# PostgreSQL and MongoDB are provided as ready-to-use but commented-out blocks.
+# To enable one, uncomment: the service block below, its connection var on `api`,
+# the matching line under `api.depends_on`, and its volume under the top-level
+# `volumes:`. The app still uses the in-memory store, so enabling a DB just
+# makes it reachable — swap the store later behind apps/api/src/lib/store.ts.
+services:
+  api:
+    build:
+      context: .
+      dockerfile: apps/api/Dockerfile
+    ports:
+      - "8080:8080"
+    environment:
+      PORT: "8080"
+      # Origin the browser uses to load the web app (CORS allow-list).
+      CORS_ORIGIN: "http://localhost:3000"
+      # ── Enable PostgreSQL: uncomment DATABASE_URL + the postgres service + api.depends_on + volumes ──
+      # DATABASE_URL: "postgresql://hackathon:hackathon@postgres:5432/hackathon"
+      # ── Enable MongoDB:    uncomment MONGODB_URI  + the mongo service   + api.depends_on + volumes ──
+      # MONGODB_URI: "mongodb://hackathon:hackathon@mongo:27017/hackathon?authSource=admin"
+    # depends_on:
+    #   postgres:
+    #     condition: service_healthy
+    #   # mongo:
+    #   #   condition: service_healthy
+    restart: unless-stopped
+
+  web:
+    build:
+      context: .
+      dockerfile: apps/web/Dockerfile
+      args:
+        # NEXT_PUBLIC_* is inlined at BUILD time — bake the browser-facing API URL here.
+        NEXT_PUBLIC_API_URL: "http://localhost:8080"
+    ports:
+      - "3000:3000"
+    restart: unless-stopped
+
+  # ───────────────────────────────────────────────────────────────────────
+  # PostgreSQL — to enable: uncomment this block, DATABASE_URL on `api`,
+  #             the matching depends_on line, and `pgdata` under `volumes:`
+  # ───────────────────────────────────────────────────────────────────────
+  # postgres:
+  #   image: postgres:17-alpine
+  #   restart: unless-stopped
+  #   environment:
+  #     POSTGRES_USER: hackathon
+  #     POSTGRES_PASSWORD: hackathon
+  #     POSTGRES_DB: hackathon
+  #   ports:
+  #     - "5432:5432"
+  #   volumes:
+  #     - pgdata:/var/lib/postgresql/data
+  #   healthcheck:
+  #     test: ["CMD-SHELL", "pg_isready -U hackathon -d hackathon"]
+  #     interval: 5s
+  #     timeout: 5s
+  #     retries: 10
+
+  # ───────────────────────────────────────────────────────────────────────
+  # MongoDB — to enable: uncomment this block, MONGODB_URI on `api`,
+  #           the matching depends_on line, and `mongodata` under `volumes:`
+  # ───────────────────────────────────────────────────────────────────────
+  # mongo:
+  #   image: mongo:8
+  #   restart: unless-stopped
+  #   environment:
+  #     MONGO_INITDB_ROOT_USERNAME: hackathon
+  #     MONGO_INITDB_ROOT_PASSWORD: hackathon
+  #   ports:
+  #     - "27017:27017"
+  #   volumes:
+  #     - mongodata:/data/db
+  #   healthcheck:
+  #     test: ["CMD-SHELL", "mongosh --quiet --eval 'db.runCommand({ ping: 1 }).ok' | grep -q 1"]
+  #     interval: 5s
+  #     timeout: 5s
+  #     retries: 10
+
+# volumes:
+#   pgdata:
+#   mongodata:

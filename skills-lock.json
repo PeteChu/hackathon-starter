@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "skills": {
+    "frontend-slides": {
+      "source": "zarazhangrui/frontend-slides",
+      "sourceType": "github",
+      "skillPath": "SKILL.md",
+      "computedHash": "7da7864a4502a5b8de85b0ab6c211051018a3631002a40a1bb34c924442e25d9"
+    },
+    "grill-with-docs": {
+      "source": "mattpocock/skills",
+      "sourceType": "github",
+      "skillPath": "skills/engineering/grill-with-docs/SKILL.md",
+      "computedHash": "eb0e91e84277283dc2b23ed544399e53afd6b5287e5b6929f25fe8aa608e164b"
+    },
+    "shadcn": {
+      "source": "shadcn/ui",
+      "sourceType": "github",
+      "skillPath": "skills/shadcn/SKILL.md",
+      "computedHash": "ac9d0d69caac7de1d1e5647f3db3bcd2f13af355d6b3a78780fbf7fc80e8dca0"
+    }
+  }
+}
