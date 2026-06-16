@@ -368,7 +368,7 @@
           This workflow is tailored to the current starter: a pnpm/turbo
           monorepo with a Fastify + Zod API in <code>apps/api</code>, a Next.js
           16 App Router UI in <code>apps/web</code>, placeholder planning docs,
-          and seven project skills under <code>.claude/skills</code>.
+           and ten project skills under <code>.agents/skills</code> and <code>.claude/skills</code>.
         </p>
       </header>
 
@@ -430,16 +430,18 @@ make smoke      # with API running</code></pre>
         </h2>
         <div class="panel flow" aria-label="Skill flow diagram">
           <svg
-            viewBox="0 0 1120 280"
+            viewBox="0 0 1120 440"
             role="img"
             aria-labelledby="flow-title flow-desc"
           >
             <title id="flow-title">Hackathon skills flow</title>
             <desc id="flow-desc">
-              Problem framer creates the brief, solution architect creates
-              architecture, API contract pins endpoints, task slicer creates
-              tasks, implement vertical slice builds code, test fast verifies
-              it, demo story creates the final presentation.
+              Problem framer creates the brief, grill-with-docs validates the
+              brief and architecture, solution architect creates architecture,
+              API contract pins endpoints, task slicer creates tasks, implement
+              vertical slice builds code with shadcn components, test fast
+              verifies it, demo story creates the script, frontend-slides
+              builds the visual deck.
             </desc>
             <defs>
               <marker
@@ -701,63 +703,69 @@ make smoke      # with API running</code></pre>
               marker-end="url(#arrow)"
             />
 
+            <!-- ← auxiliary: grill-with-docs (validates brief / architecture) -->
+            <rect
+              x="100" y="130" width="200" height="70" rx="14"
+              fill="#fff" stroke="#d1cfc5" stroke-width="2" filter="url(#shadow)"
+            />
+            <text x="200" y="160" text-anchor="middle" font-family="ui-serif, Georgia" font-size="18" fill="#141413">grill-with-docs</text>
+            <text x="200" y="182" text-anchor="middle" font-family="monospace" font-size="11" fill="#87867f">CONTEXT.md + ADRs</text>
+
+            <!-- ← auxiliary: shadcn (frontend components during build) -->
+            <rect
+              x="770" y="130" width="160" height="70" rx="14"
+              fill="#fff" stroke="#d1cfc5" stroke-width="2" filter="url(#shadow)"
+            />
+            <text x="850" y="160" text-anchor="middle" font-family="ui-serif, Georgia" font-size="18" fill="#141413">shadcn</text>
+            <text x="850" y="182" text-anchor="middle" font-family="monospace" font-size="11" fill="#87867f">UI components</text>
+
+            <!-- problem-framer → grill-with-docs -->
+            <line x1="87" y1="90" x2="140" y2="130" stroke="#b85c3e" stroke-width="2" stroke-dasharray="6 6" marker-end="url(#arrow)"/>
+            <!-- solution-architect → grill-with-docs -->
+            <line x1="288" y1="90" x2="260" y2="130" stroke="#b85c3e" stroke-width="2" stroke-dasharray="6 6" marker-end="url(#arrow)"/>
+            <!-- implement slice → shadcn -->
+            <line x1="863" y1="90" x2="850" y2="130" stroke="#b85c3e" stroke-width="2" stroke-dasharray="6 6" marker-end="url(#arrow)"/>
+
+            <!-- iteration loop (below everything) -->
             <path
-              d="M1052 96 C1052 178 860 196 666 128"
+              d="M1052 96 C1052 380 820 380 666 128"
               fill="none"
               stroke="#788c5d"
               stroke-width="2.5"
               stroke-dasharray="6 7"
               marker-end="url(#arrow)"
             />
-            <text
-              x="877"
-              y="184"
-              text-anchor="middle"
-              font-family="monospace"
-              font-size="12"
-              fill="#52643d"
-            >
+            <text x="877" y="370" text-anchor="middle" font-family="monospace" font-size="12" fill="#52643d">
               iterate only if the first slice is already demoable
             </text>
 
-            <rect
-              x="432"
-              y="194"
-              width="256"
-              height="62"
-              rx="14"
-              fill="#fff"
-              stroke="#d1cfc5"
-              stroke-width="2"
-              filter="url(#shadow)"
-            />
-            <text
-              x="560"
-              y="220"
-              text-anchor="middle"
-              font-family="ui-serif, Georgia"
-              font-size="18"
-              fill="#141413"
-            >
-              demo-story
-            </text>
-            <text
-              x="560"
-              y="242"
-              text-anchor="middle"
-              font-family="monospace"
-              font-size="11"
-              fill="#87867f"
-            >
-              demo-script.md + pitch.md
-            </text>
+            <!-- test-fast → demo-story -->
             <path
-              d="M1052 96 C992 176 742 202 696 220"
+              d="M1052 96 C1052 210 620 210 475 250"
               fill="none"
               stroke="#b85c3e"
               stroke-width="2.5"
               marker-end="url(#arrow)"
             />
+
+            <!-- demo-story (moved down) -->
+            <rect
+              x="350" y="250" width="250" height="70" rx="14"
+              fill="#fff" stroke="#d1cfc5" stroke-width="2" filter="url(#shadow)"
+            />
+            <text x="475" y="280" text-anchor="middle" font-family="ui-serif, Georgia" font-size="18" fill="#141413">demo-story</text>
+            <text x="475" y="302" text-anchor="middle" font-family="monospace" font-size="11" fill="#87867f">demo-script.md + pitch.md</text>
+
+            <!-- demo-story → frontend-slides -->
+            <line x1="600" y1="285" x2="635" y2="285" stroke="#b85c3e" stroke-width="2.5" marker-end="url(#arrow)"/>
+
+            <!-- frontend-slides (visual deck) -->
+            <rect
+              x="640" y="250" width="240" height="70" rx="14"
+              fill="#fff" stroke="#d1cfc5" stroke-width="2" filter="url(#shadow)"
+            />
+            <text x="760" y="280" text-anchor="middle" font-family="ui-serif, Georgia" font-size="18" fill="#141413">frontend-slides</text>
+            <text x="760" y="302" text-anchor="middle" font-family="monospace" font-size="11" fill="#87867f">HTML presentation deck</text>
           </svg>
         </div>
 
@@ -844,6 +852,43 @@ make smoke      # with API running</code></pre>
                   fallback, Q&amp;A, and next ask.
                 </td>
               </tr>
+              <tr>
+                <td><code>/grill-with-docs</code></td>
+                <td>
+                  Right after <code>/problem-framer</code> or
+                  <code>/solution-architect</code> to stress-test plans against
+                  the domain model.
+                </td>
+                <td>Draft problem brief or architecture.</td>
+                <td>
+                  Sharpened <code>CONTEXT.md</code> glossary, ADRs, refined
+                  terminology.
+                </td>
+              </tr>
+              <tr>
+                <td><code>/shadcn</code></td>
+                <td>
+                  During frontend implementation, when adding shadcn/ui
+                  components.
+                </td>
+                <td>Component name, preset code, or registry search.</td>
+                <td>
+                  Installed component source, styled UI following project
+                  conventions.
+                </td>
+              </tr>
+              <tr>
+                <td><code>/frontend-slides</code></td>
+                <td>
+                  After <code>/demo-story</code>, when creating the visual
+                  pitch deck.
+                </td>
+                <td>Deck topic, slide count, aesthetic preference.</td>
+                <td>
+                  Self-contained HTML presentation file with animations and
+                  fixed 16:9 stage.
+                </td>
+              </tr>
             </tbody>
           </table>
         </div>
@@ -916,6 +961,10 @@ make smoke      # terminal C, API must be running</code></pre>
                   Record assumptions instead of blocking, except for safety,
                   secrets, or external-system access.
                 </li>
+                <li>
+                  Optionally run <code>/grill-with-docs</code> to stress-test the
+                  brief against the domain model and sharpen terminology.
+                </li>
               </ul>
             </div>
           </article>
@@ -954,6 +1003,10 @@ make smoke      # terminal C, API must be running</code></pre>
                   For frontend work, remember <code>apps/web/CLAUDE.md</code>:
                   read local Next.js 16 docs under
                   <code>node_modules/next/dist/docs/</code> when unsure.
+                </li>
+                <li>
+                  Optionally run <code>/grill-with-docs</code> to validate the
+                  architecture against the brief and surface hidden assumptions.
                 </li>
               </ul>
             </div>
@@ -1068,6 +1121,8 @@ apps/web/lib/api.ts
                 <li>
                   Frontend: headline, value proposition, primary action, results
                   area, proof metric, plus loading/empty/success/error states.
+                  Use <code>/shadcn</code> to add UI components (Button, Card,
+                  Input, etc.) instead of writing custom HTML.
                 </li>
                 <li>
                   Verification: run <code>make test</code>, then
@@ -1182,6 +1237,10 @@ apps/web/lib/api.ts
                   Rehearse against security, scalability, adoption, and
                   data-quality questions.
                 </li>
+                <li>
+                  Run <code>/frontend-slides</code> to produce a polished HTML
+                  presentation deck from the demo script for the live pitch.
+                </li>
               </ul>
             </div>
           </article>
@@ -1260,6 +1319,10 @@ make smoke</code></pre>
               <code>docs/task-board.md</code>, <code>docs/test-plan.md</code>,
               <code>docs/demo-script.md</code>, and <code>docs/pitch.md</code>.
             </p>
+            <p>
+              Skills live under both <code>.agents/skills/</code> and
+              <code>.claude/skills/</code>.
+            </p>
           </article>
           <article class="panel card">
             <h3>Verification seam</h3>
@@ -1296,7 +1359,7 @@ make smoke</code></pre>
                   </tr>
                   <tr>
                     <td><code>frontend-nextjs</code></td>
-                    <td>Next.js 16 UI, four states, API integration.</td>
+                    <td>Next.js 16 UI, four states, API integration, shadcn components.</td>
                     <td>
                       <code>apps/web/app/**</code>, <code>apps/web/lib/**</code>
                     </td>
@@ -1454,7 +1517,8 @@ make smoke
           <code>apps/api/src/server.ts</code>,
           <code>apps/web/app/page.tsx</code>, <code>apps/web/lib/api.ts</code>,
           <code>apps/web/CLAUDE.md</code>, <code>docs/*.md</code>, and all
-          <code>.claude/skills/*/SKILL.md</code> files in this workspace.
+          <code>.claude/skills/*/SKILL.md</code> and
+          <code>.agents/skills/*/SKILL.md</code> files in this workspace.
         </p>
       </footer>
     </main>
