@@ -1,0 +1,1471 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>docs/ — Planning &amp; Pitch Artifacts</title>
+    <style>
+      :root {
+        --ivory: #faf9f5;
+        --slate: #141413;
+        --clay: #d97757;
+        --clay-d: #b85c3e;
+        --oat: #e3dacc;
+        --olive: #788c5d;
+        --rust: #b04a3f;
+        --gray-150: #f0eee6;
+        --gray-300: #d1cfc5;
+        --gray-500: #87867f;
+        --gray-700: #3d3d3a;
+        --white: #ffffff;
+        --serif: ui-serif, Georgia, "Times New Roman", Times, serif;
+        --sans: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial,
+          sans-serif;
+        --mono: ui-monospace, "SF Mono", Menlo, Monaco, Consolas, monospace;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html {
+        scroll-behavior: smooth;
+      }
+      body {
+        margin: 0;
+        padding: 56px 24px 96px;
+        background: var(--ivory);
+        color: var(--gray-700);
+        font-family: var(--sans);
+        font-size: 15px;
+        line-height: 1.6;
+        -webkit-font-smoothing: antialiased;
+      }
+      .page {
+        max-width: 1100px;
+        margin: 0 auto;
+      }
+      header.page-head {
+        margin-bottom: 40px;
+        max-width: 820px;
+      }
+      .eyebrow {
+        font-family: var(--mono);
+        font-size: 11px;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--gray-500);
+        margin-bottom: 12px;
+      }
+      h1,
+      h2,
+      h3 {
+        color: var(--slate);
+        font-family: var(--serif);
+        font-weight: 500;
+      }
+      h1 {
+        font-size: clamp(30px, 4.6vw, 42px);
+        line-height: 1.12;
+        letter-spacing: -0.015em;
+        margin: 0 0 16px;
+      }
+      .lead {
+        max-width: 720px;
+        margin: 0 0 20px;
+      }
+      .meta-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px 18px;
+        font-family: var(--mono);
+        font-size: 12px;
+        color: var(--gray-500);
+      }
+      .meta-row span b {
+        color: var(--gray-700);
+        font-weight: 600;
+      }
+      /* In-page nav */
+      nav.jump {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-top: 22px;
+      }
+      nav.jump a {
+        font-family: var(--mono);
+        font-size: 12px;
+        text-decoration: none;
+        color: var(--gray-700);
+        background: var(--white);
+        border: 1.5px solid var(--gray-300);
+        border-radius: 999px;
+        padding: 6px 13px;
+        transition: border-color 120ms, color 120ms;
+      }
+      nav.jump a:hover {
+        border-color: var(--clay);
+        color: var(--clay-d);
+      }
+      /* Section headers */
+      section {
+        margin-bottom: 64px;
+        scroll-margin-top: 24px;
+      }
+      .sec-head {
+        display: flex;
+        align-items: baseline;
+        gap: 12px;
+        margin-bottom: 8px;
+      }
+      .sec-head .num {
+        font-family: var(--mono);
+        font-size: 12px;
+        background: var(--oat);
+        color: var(--slate);
+        padding: 3px 9px;
+        border-radius: 8px;
+      }
+      .sec-head h2 {
+        margin: 0;
+        font-size: 25px;
+        letter-spacing: -0.01em;
+      }
+      .sec-intro {
+        color: var(--gray-500);
+        max-width: 760px;
+        margin: 0 0 24px;
+      }
+      code {
+        font-family: var(--mono);
+        font-size: 0.9em;
+        background: var(--gray-150);
+        border: 1px solid var(--gray-300);
+        border-radius: 5px;
+        padding: 1px 5px;
+        color: var(--slate);
+      }
+      /* Chips */
+      .chips {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px;
+      }
+      .chip {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        border: 1.5px solid var(--gray-300);
+        border-radius: 999px;
+        background: var(--white);
+        padding: 3px 9px;
+        font-family: var(--mono);
+        font-size: 11px;
+        color: var(--gray-700);
+        white-space: nowrap;
+      }
+      .chip.skill {
+        color: var(--clay-d);
+        border-color: rgba(217, 119, 87, 0.5);
+        background: rgba(217, 119, 87, 0.08);
+      }
+      .chip.file {
+        color: var(--slate);
+      }
+      /* Tables */
+      .table-wrap {
+        overflow-x: auto;
+        border: 1.5px solid var(--gray-300);
+        border-radius: 12px;
+        background: var(--white);
+      }
+      table {
+        border-collapse: collapse;
+        width: 100%;
+        min-width: 760px;
+        font-size: 13.5px;
+      }
+      thead th {
+        text-align: left;
+        font-family: var(--mono);
+        font-size: 11px;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+        color: var(--gray-500);
+        background: var(--gray-150);
+        padding: 12px 16px;
+        border-bottom: 1.5px solid var(--gray-300);
+        white-space: nowrap;
+      }
+      tbody td {
+        padding: 14px 16px;
+        border-bottom: 1px solid var(--gray-150);
+        vertical-align: top;
+      }
+      tbody tr:last-child td {
+        border-bottom: none;
+      }
+      tbody tr:hover td {
+        background: #fcfbf7;
+      }
+      td .cell-file {
+        font-family: var(--mono);
+        font-size: 12.5px;
+        color: var(--slate);
+        display: block;
+        margin-bottom: 4px;
+      }
+      td .cell-sub {
+        font-size: 12px;
+        color: var(--gray-500);
+      }
+      /* Trace table */
+      .trace-table td:first-child {
+        font-weight: 600;
+        color: var(--slate);
+        white-space: nowrap;
+      }
+      .trace-table .arrow {
+        color: var(--clay);
+        font-weight: 700;
+        margin: 0 2px;
+      }
+      .trace-table .ref {
+        font-family: var(--mono);
+        font-size: 11.5px;
+        color: var(--gray-500);
+      }
+      /* Workflow timeline */
+      .timeline {
+        position: relative;
+        padding-left: 8px;
+        margin-top: 6px;
+      }
+      .timeline::before {
+        content: "";
+        position: absolute;
+        left: 23px;
+        top: 10px;
+        bottom: 10px;
+        width: 2px;
+        background: var(--gray-300);
+      }
+      .tl-entry {
+        position: relative;
+        padding: 0 0 20px 56px;
+      }
+      .tl-entry:last-child {
+        padding-bottom: 0;
+      }
+      .tl-num {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        background: var(--white);
+        border: 2px solid var(--gray-300);
+        color: var(--gray-700);
+        font-family: var(--mono);
+        font-size: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .tl-entry.core .tl-num {
+        border-color: var(--clay);
+        color: var(--clay-d);
+        background: rgba(217, 119, 87, 0.08);
+      }
+      .tl-entry.code .tl-num {
+        border-color: var(--slate);
+        color: var(--slate);
+        background: var(--gray-150);
+      }
+      .tl-entry.optional .tl-num {
+        border-style: dashed;
+        color: var(--gray-500);
+      }
+      .tl-line {
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 8px 10px;
+      }
+      .tl-skill {
+        font-family: var(--mono);
+        font-size: 14px;
+        color: var(--slate);
+        font-weight: 600;
+      }
+      .tl-entry.optional .tl-skill {
+        color: var(--gray-500);
+      }
+      .tl-output {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        font-family: var(--mono);
+        font-size: 12px;
+        color: var(--gray-700);
+        background: var(--gray-150);
+        border: 1px solid var(--gray-300);
+        border-radius: 6px;
+        padding: 2px 8px;
+      }
+      .tl-tag {
+        font-family: var(--mono);
+        font-size: 10.5px;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+        color: var(--gray-500);
+      }
+      .tl-note {
+        color: var(--gray-500);
+        font-size: 13px;
+        margin-top: 3px;
+      }
+      .tl-flow {
+        color: var(--clay);
+        font-weight: 700;
+      }
+      /* Checklist */
+      .checklist-card {
+        background: var(--white);
+        border: 1.5px solid var(--gray-300);
+        border-radius: 12px;
+        overflow: hidden;
+      }
+      .checklist-head {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        padding: 16px 20px;
+        background: var(--gray-150);
+        border-bottom: 1.5px solid var(--gray-300);
+        flex-wrap: wrap;
+      }
+      .progress-meter {
+        flex: 1;
+        min-width: 180px;
+      }
+      .progress-track {
+        height: 8px;
+        background: var(--gray-300);
+        border-radius: 999px;
+        overflow: hidden;
+      }
+      .progress-fill {
+        height: 100%;
+        width: 0%;
+        background: var(--olive);
+        border-radius: 999px;
+        transition: width 220ms ease, background 220ms ease;
+      }
+      .progress-label {
+        margin-top: 7px;
+        font-family: var(--mono);
+        font-size: 12px;
+        color: var(--gray-700);
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+      .progress-state {
+        display: none;
+      }
+      .progress-state.show {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        font-family: var(--mono);
+        font-size: 11px;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+        border-radius: 999px;
+        padding: 3px 9px;
+      }
+      .progress-state.ready {
+        background: rgba(120, 140, 93, 0.15);
+        color: var(--olive);
+        border: 1px solid rgba(120, 140, 93, 0.45);
+      }
+      .reset-btn {
+        font-family: var(--mono);
+        font-size: 12px;
+        color: var(--gray-700);
+        background: var(--white);
+        border: 1.5px solid var(--gray-300);
+        border-radius: 8px;
+        padding: 7px 13px;
+        cursor: pointer;
+        transition: border-color 120ms, color 120ms;
+      }
+      .reset-btn:hover {
+        border-color: var(--clay);
+        color: var(--clay-d);
+      }
+      .check-list {
+        list-style: none;
+        margin: 0;
+        padding: 6px 0;
+      }
+      .check-list li {
+        display: flex;
+        align-items: flex-start;
+        gap: 12px;
+        padding: 12px 20px;
+        border-bottom: 1px solid var(--gray-150);
+        cursor: pointer;
+        transition: background 100ms;
+      }
+      .check-list li:last-child {
+        border-bottom: none;
+      }
+      .check-list li:hover {
+        background: #fcfbf7;
+      }
+      .check-list input {
+        position: absolute;
+        opacity: 0;
+        pointer-events: none;
+      }
+      .check-box {
+        flex: 0 0 auto;
+        width: 20px;
+        height: 20px;
+        border: 1.5px solid var(--gray-300);
+        border-radius: 6px;
+        background: var(--white);
+        margin-top: 1px;
+        position: relative;
+        transition: background 120ms, border-color 120ms;
+      }
+      .check-box::after {
+        content: "";
+        position: absolute;
+        left: 6px;
+        top: 2px;
+        width: 5px;
+        height: 10px;
+        border: solid var(--white);
+        border-width: 0 2px 2px 0;
+        transform: rotate(45deg) scale(0);
+        transition: transform 120ms;
+      }
+      .check-list li.checked .check-box {
+        background: var(--olive);
+        border-color: var(--olive);
+      }
+      .check-list li.checked .check-box::after {
+        transform: rotate(45deg) scale(1);
+      }
+      .check-label {
+        font-size: 14px;
+        color: var(--gray-700);
+        transition: color 120ms;
+      }
+      .check-list li.checked .check-label {
+        color: var(--gray-500);
+        text-decoration: line-through;
+      }
+      .check-label code {
+        font-size: 12.5px;
+      }
+      /* Diagram */
+      .diagram {
+        background: var(--white);
+        border: 1.5px solid var(--gray-300);
+        border-radius: 12px;
+        padding: 22px 16px 14px;
+        overflow-x: auto;
+      }
+      .diagram svg {
+        display: block;
+        width: 100%;
+        min-width: 720px;
+        height: auto;
+      }
+      .diagram-caption {
+        text-align: center;
+        font-family: var(--mono);
+        font-size: 11.5px;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        color: var(--gray-500);
+        margin-top: 10px;
+      }
+      .diagram-caption .pipe-arrow {
+        color: var(--clay);
+      }
+      /* Callout */
+      .callout {
+        border-left: 4px solid var(--clay);
+        background: var(--white);
+        border-radius: 0 12px 12px 0;
+        border-top: 1.5px solid var(--gray-300);
+        border-right: 1.5px solid var(--gray-300);
+        border-bottom: 1.5px solid var(--gray-300);
+        padding: 16px 20px;
+        max-width: 860px;
+        font-size: 14px;
+      }
+      .callout strong {
+        color: var(--slate);
+      }
+      /* Ordered steps */
+      ol.steps {
+        max-width: 820px;
+        padding-left: 22px;
+        margin: 0 0 8px;
+      }
+      ol.steps li {
+        margin-bottom: 12px;
+      }
+      ol.steps code {
+        font-size: 12.5px;
+      }
+      /* Footer */
+      footer.page-foot {
+        margin-top: 56px;
+        padding-top: 24px;
+        border-top: 1.5px solid var(--gray-300);
+        font-family: var(--mono);
+        font-size: 12px;
+        color: var(--gray-500);
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+      @media (max-width: 820px) {
+        body {
+          padding: 36px 16px 72px;
+        }
+        section {
+          margin-bottom: 48px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="page">
+      <header class="page-head">
+        <div class="eyebrow">docs · planning &amp; pitch artifacts</div>
+        <h1>docs/ — Planning &amp; Pitch Artifacts</h1>
+        <p class="lead">
+          This directory holds the project’s planning, delivery, and evaluation
+          documents. Each file is produced or updated by a project skill
+          (listed in <code>.claude/skills/</code>). Together they form the
+          handoff contract between skills and the evidence trail for hackathon
+          judging.
+        </p>
+        <div class="meta-row">
+          <span><b>9</b> documents</span>
+          <span><b>8</b> skills</span>
+          <span>handoff contract · judging evidence trail</span>
+        </div>
+        <nav class="jump">
+          <a href="#overview">Document overview</a>
+          <a href="#workflow">Recommended order</a>
+          <a href="#checklist">Readiness checklist</a>
+          <a href="#traceability">Traceability map</a>
+        </nav>
+      </header>
+
+      <!-- 01 Document overview -->
+      <section id="overview">
+        <div class="sec-head">
+          <span class="num">01</span>
+          <h2>Document overview</h2>
+        </div>
+        <p class="sec-intro">
+          Every artifact, what it is for, which skill produces it, who consumes
+          it, and who reads it.
+        </p>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>File</th>
+                <th>Purpose</th>
+                <th>Produced by</th>
+                <th>Consumed by</th>
+                <th>Audience</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+                  <span class="cell-file">problem-brief.md</span>
+                </td>
+                <td>
+                  Target user, pain, success metric, MVP scope, assumptions, wow
+                  moment
+                </td>
+                <td>
+                  <span class="chip skill">/problem-framer</span>
+                </td>
+                <td>All downstream skills</td>
+                <td>
+                  <div class="chips">
+                    <span class="chip">Team</span>
+                    <span class="chip">Judges</span>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <span class="cell-file">architecture.md</span>
+                </td>
+                <td>
+                  Components, request flow, data model, config, tradeoffs,
+                  production path
+                </td>
+                <td>
+                  <span class="chip skill">/solution-architect</span>
+                </td>
+                <td>
+                  <span class="chip skill">/api-contract</span>,
+                  <span class="chip skill">/task-slicer</span>, implementers
+                </td>
+                <td>
+                  <div class="chips">
+                    <span class="chip">Team</span>
+                    <span class="chip">Judges</span>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <span class="cell-file">api-contract.md</span>
+                </td>
+                <td>
+                  Endpoint shapes, Zod rules, JSON errors, frontend fetch notes
+                </td>
+                <td>
+                  <span class="chip skill">/api-contract</span>
+                </td>
+                <td>Backend + frontend implementers</td>
+                <td>
+                  <div class="chips">
+                    <span class="chip">Team</span>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <span class="cell-file">task-board.md</span>
+                </td>
+                <td>
+                  Now / Next / Later / Cut tasks with owners, effort, acceptance
+                  checks
+                </td>
+                <td>
+                  <span class="chip skill">/task-slicer</span>
+                </td>
+                <td>All implementers</td>
+                <td>
+                  <div class="chips">
+                    <span class="chip">Team</span>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <span class="cell-file">test-plan.md</span>
+                </td>
+                <td>
+                  Critical user journey, automated checks, manual demo checks
+                </td>
+                <td>
+                  <span class="chip skill">/test-fast</span>
+                </td>
+                <td>Implementers + presenters</td>
+                <td>
+                  <div class="chips">
+                    <span class="chip">Team</span>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <span class="cell-file">demo-script.md</span>
+                </td>
+                <td>10-second hook, live flow, backup plan, judge Q&amp;A</td>
+                <td>
+                  <span class="chip skill">/demo-story</span>
+                </td>
+                <td>Presenters</td>
+                <td>
+                  <div class="chips">
+                    <span class="chip">Presenters</span>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <span class="cell-file">pitch.md</span>
+                </td>
+                <td>One-liner, demo proof, impact, credibility, ask</td>
+                <td>
+                  <span class="chip skill">/demo-story</span>
+                </td>
+                <td>Presenters</td>
+                <td>
+                  <div class="chips">
+                    <span class="chip">Judges</span>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <span class="cell-file">judging-scorecard.md</span>
+                </td>
+                <td>Weighted rubric with scores, evidence, and next-fix notes</td>
+                <td>
+                  Manual / <span class="chip skill">/demo-story</span>
+                </td>
+                <td>Team + judges</td>
+                <td>
+                  <div class="chips">
+                    <span class="chip">Team</span>
+                    <span class="chip">Judges</span>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <span class="cell-file">hackathon-ai-workflow-plan.html</span>
+                </td>
+                <td>End-to-end workflow guide and visual skill-flow map</td>
+                <td>Manual / scaffold</td>
+                <td>Team</td>
+                <td>
+                  <div class="chips">
+                    <span class="chip">Team</span>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- 02 Recommended order -->
+      <section id="workflow">
+        <div class="sec-head">
+          <span class="num">02</span>
+          <h2>Recommended order</h2>
+        </div>
+        <p class="sec-intro">
+          The sequence to follow when filling the docs for a new challenge —
+          each skill produces the file that feeds the next.
+        </p>
+        <div class="timeline">
+          <div class="tl-entry optional">
+            <div class="tl-num">?</div>
+            <div class="tl-line">
+              <span class="tl-skill">/grill-with-docs</span>
+              <span class="tl-tag">optional</span>
+            </div>
+            <div class="tl-note">
+              Run only if domain terms are fuzzy — sharpens
+              <code>CONTEXT.md</code>.
+            </div>
+          </div>
+          <div class="tl-entry core">
+            <div class="tl-num">1</div>
+            <div class="tl-line">
+              <span class="tl-skill">/problem-framer</span>
+              <span class="tl-flow">→</span>
+              <span class="tl-output">problem-brief.md</span>
+            </div>
+          </div>
+          <div class="tl-entry core">
+            <div class="tl-num">2</div>
+            <div class="tl-line">
+              <span class="tl-skill">/solution-architect</span>
+              <span class="tl-flow">→</span>
+              <span class="tl-output">architecture.md</span>
+            </div>
+          </div>
+          <div class="tl-entry core">
+            <div class="tl-num">3</div>
+            <div class="tl-line">
+              <span class="tl-skill">/api-contract</span>
+              <span class="tl-flow">→</span>
+              <span class="tl-output">api-contract.md</span>
+            </div>
+          </div>
+          <div class="tl-entry core">
+            <div class="tl-num">4</div>
+            <div class="tl-line">
+              <span class="tl-skill">/task-slicer</span>
+              <span class="tl-flow">→</span>
+              <span class="tl-output">task-board.md</span>
+            </div>
+          </div>
+          <div class="tl-entry code">
+            <div class="tl-num">5</div>
+            <div class="tl-line">
+              <span class="tl-skill">/implement-vertical-slice</span>
+              <span class="tl-tag">code</span>
+            </div>
+            <div class="tl-note">Build the working slice — no doc produced.</div>
+          </div>
+          <div class="tl-entry core">
+            <div class="tl-num">6</div>
+            <div class="tl-line">
+              <span class="tl-skill">/test-fast</span>
+              <span class="tl-flow">→</span>
+              <span class="tl-output">test-plan.md</span>
+            </div>
+          </div>
+          <div class="tl-entry core">
+            <div class="tl-num">7</div>
+            <div class="tl-line">
+              <span class="tl-skill">/demo-story</span>
+              <span class="tl-flow">→</span>
+              <span class="tl-output">demo-script.md</span>
+              <span class="tl-output">pitch.md</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 03 Readiness checklist -->
+      <section id="checklist">
+        <div class="sec-head">
+          <span class="num">03</span>
+          <h2>Final readiness checklist</h2>
+        </div>
+        <p class="sec-intro">
+          Before the hackathon submission freeze, confirm each of these. Your
+          checks are saved in this browser.
+        </p>
+        <div class="checklist-card">
+          <div class="checklist-head">
+            <div class="progress-meter">
+              <div class="progress-track">
+                <div class="progress-fill" id="progressFill"></div>
+              </div>
+              <div class="progress-label">
+                <span id="progressCount">0 / 11 ready</span>
+                <span class="progress-state ready" id="progressState"
+                  >✓ Submission ready</span
+                >
+              </div>
+            </div>
+            <button class="reset-btn" id="resetBtn" type="button">
+              Reset
+            </button>
+          </div>
+          <ul class="check-list" id="checkList">
+            <li data-id="problem-brief">
+              <span class="check-box"></span>
+              <span class="check-label"
+                ><code>problem-brief.md</code> — user, pain, success metric, MVP
+                scope, and wow moment are all filled</span
+              >
+            </li>
+            <li data-id="architecture">
+              <span class="check-box"></span>
+              <span class="check-label"
+                ><code>architecture.md</code> — components, request flow, data
+                model, config, production path are described</span
+              >
+            </li>
+            <li data-id="api-contract">
+              <span class="check-box"></span>
+              <span class="check-label"
+                ><code>api-contract.md</code> — endpoint table is populated with
+                real demo-slice endpoints only</span
+              >
+            </li>
+            <li data-id="task-board">
+              <span class="check-box"></span>
+              <span class="check-label"
+                ><code>task-board.md</code> — Now tasks are complete, Cut list is
+                explicit</span
+              >
+            </li>
+            <li data-id="test-plan">
+              <span class="check-box"></span>
+              <span class="check-label"
+                ><code>test-plan.md</code> — critical journey is tested, smoke
+                check passes, demo risks are documented</span
+              >
+            </li>
+            <li data-id="demo-script">
+              <span class="check-box"></span>
+              <span class="check-label"
+                ><code>demo-script.md</code> — hook, live flow (step by step),
+                fallback, and Q&amp;A answers are written</span
+              >
+            </li>
+            <li data-id="pitch">
+              <span class="check-box"></span>
+              <span class="check-label"
+                ><code>pitch.md</code> — one-liner, demo proof, impact,
+                credibility, and ask are filled</span
+              >
+            </li>
+            <li data-id="judging-scorecard">
+              <span class="check-box"></span>
+              <span class="check-label"
+                ><code>judging-scorecard.md</code> — scores and judge-visible
+                evidence are filled for each criterion</span
+              >
+            </li>
+            <li data-id="workflow-plan">
+              <span class="check-box"></span>
+              <span class="check-label"
+                ><code>hackathon-ai-workflow-plan.html</code> — kept as reference
+                (no changes needed unless the workflow changes)</span
+              >
+            </li>
+            <li data-id="context-terms">
+              <span class="check-box"></span>
+              <span class="check-label"
+                >All docs use consistent terminology with
+                <code>CONTEXT.md</code> (if present)</span
+              >
+            </li>
+            <li data-id="no-stale">
+              <span class="check-box"></span>
+              <span class="check-label"
+                >No stale starter-only references remain (e.g.
+                <code>/api/ideas</code> references, idea-board screenshots)</span
+              >
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- 04 Traceability map -->
+      <section id="traceability">
+        <div class="sec-head">
+          <span class="num">04</span>
+          <h2>Traceability map — problem → proof → judging</h2>
+        </div>
+        <p class="sec-intro">
+          Each element of the problem brief should trace through architecture,
+          API, tasks, tests, and demo to the judging scorecard. Use this map to
+          verify end-to-end traceability once the challenge is known.
+        </p>
+
+        <div class="diagram">
+          <svg
+            viewBox="0 0 1100 250"
+            role="img"
+            aria-label="Pipeline flowing from Problem Brief through Architecture and API, Tasks and Tests, into Demo and Judging"
+          >
+            <defs>
+              <marker
+                id="arrow"
+                viewBox="0 0 10 10"
+                refX="8"
+                refY="5"
+                markerWidth="7"
+                markerHeight="7"
+                orient="auto-start-reverse"
+              >
+                <path d="M0,0 L10,5 L0,10 z" fill="#d97757" />
+              </marker>
+            </defs>
+
+            <!-- continuous faint track behind the nodes -->
+            <line
+              x1="40"
+              y1="128"
+              x2="1060"
+              y2="128"
+              stroke="#e3dacc"
+              stroke-width="6"
+              stroke-linecap="round"
+            />
+            <!-- clay arrows in the gaps -->
+            <line
+              x1="252"
+              y1="128"
+              x2="298"
+              y2="128"
+              stroke="#d97757"
+              stroke-width="2.5"
+              marker-end="url(#arrow)"
+            />
+            <line
+              x1="532"
+              y1="128"
+              x2="578"
+              y2="128"
+              stroke="#d97757"
+              stroke-width="2.5"
+              marker-end="url(#arrow)"
+            />
+            <line
+              x1="812"
+              y1="128"
+              x2="858"
+              y2="128"
+              stroke="#d97757"
+              stroke-width="2.5"
+              marker-end="url(#arrow)"
+            />
+
+            <!-- node 1 -->
+            <g>
+              <rect
+                x="20"
+                y="72"
+                width="232"
+                height="112"
+                rx="12"
+                fill="#ffffff"
+                stroke="#d1cfc5"
+                stroke-width="1.5"
+              />
+              <text
+                x="36"
+                y="98"
+                font-family="ui-monospace, monospace"
+                font-size="11"
+                fill="#87867f"
+              >
+                STAGE 01
+              </text>
+              <text
+                x="36"
+                y="132"
+                font-family="ui-serif, Georgia, serif"
+                font-size="18"
+                fill="#141413"
+              >
+                Problem Brief
+              </text>
+              <text
+                x="36"
+                y="160"
+                font-family="ui-monospace, monospace"
+                font-size="11"
+                fill="#87867f"
+              >
+                problem-brief.md
+              </text>
+            </g>
+
+            <!-- node 2 -->
+            <g>
+              <rect
+                x="300"
+                y="72"
+                width="232"
+                height="112"
+                rx="12"
+                fill="#ffffff"
+                stroke="#d1cfc5"
+                stroke-width="1.5"
+              />
+              <text
+                x="316"
+                y="98"
+                font-family="ui-monospace, monospace"
+                font-size="11"
+                fill="#87867f"
+              >
+                STAGE 02
+              </text>
+              <text
+                x="316"
+                y="132"
+                font-family="ui-serif, Georgia, serif"
+                font-size="18"
+                fill="#141413"
+              >
+                Architecture &amp; API
+              </text>
+              <text
+                x="316"
+                y="160"
+                font-family="ui-monospace, monospace"
+                font-size="11"
+                fill="#87867f"
+              >
+                architecture · api-contract
+              </text>
+            </g>
+
+            <!-- node 3 -->
+            <g>
+              <rect
+                x="580"
+                y="72"
+                width="232"
+                height="112"
+                rx="12"
+                fill="#ffffff"
+                stroke="#d1cfc5"
+                stroke-width="1.5"
+              />
+              <text
+                x="596"
+                y="98"
+                font-family="ui-monospace, monospace"
+                font-size="11"
+                fill="#87867f"
+              >
+                STAGE 03
+              </text>
+              <text
+                x="596"
+                y="132"
+                font-family="ui-serif, Georgia, serif"
+                font-size="18"
+                fill="#141413"
+              >
+                Tasks &amp; Tests
+              </text>
+              <text
+                x="596"
+                y="160"
+                font-family="ui-monospace, monospace"
+                font-size="11"
+                fill="#87867f"
+              >
+                task-board · test-plan
+              </text>
+            </g>
+
+            <!-- node 4 -->
+            <g>
+              <rect
+                x="860"
+                y="72"
+                width="232"
+                height="112"
+                rx="12"
+                fill="#ffffff"
+                stroke="#d1cfc5"
+                stroke-width="1.5"
+              />
+              <text
+                x="876"
+                y="98"
+                font-family="ui-monospace, monospace"
+                font-size="11"
+                fill="#87867f"
+              >
+                STAGE 04
+              </text>
+              <text
+                x="876"
+                y="132"
+                font-family="ui-serif, Georgia, serif"
+                font-size="18"
+                fill="#141413"
+              >
+                Demo &amp; Judging
+              </text>
+              <text
+                x="876"
+                y="160"
+                font-family="ui-monospace, monospace"
+                font-size="11"
+                fill="#87867f"
+              >
+                demo-script · pitch · scorecard
+              </text>
+            </g>
+
+            <!-- stage labels along the bottom -->
+            <text
+              x="136"
+              y="216"
+              text-anchor="middle"
+              font-family="ui-monospace, monospace"
+              font-size="11"
+              letter-spacing="1"
+              fill="#d97757"
+            >
+              PROBLEM
+            </text>
+            <text
+              x="416"
+              y="216"
+              text-anchor="middle"
+              font-family="ui-monospace, monospace"
+              font-size="11"
+              letter-spacing="1"
+              fill="#87867f"
+            >
+              BUILD
+            </text>
+            <text
+              x="696"
+              y="216"
+              text-anchor="middle"
+              font-family="ui-monospace, monospace"
+              font-size="11"
+              letter-spacing="1"
+              fill="#87867f"
+            >
+              VERIFY
+            </text>
+            <text
+              x="976"
+              y="216"
+              text-anchor="middle"
+              font-family="ui-monospace, monospace"
+              font-size="11"
+              letter-spacing="1"
+              fill="#d97757"
+            >
+              PROOF → JUDGING
+            </text>
+          </svg>
+          <div class="diagram-caption">
+            problem <span class="pipe-arrow">→</span> proof
+            <span class="pipe-arrow">→</span> judging
+          </div>
+        </div>
+
+        <h3 style="font-size: 18px; margin: 36px 0 14px">
+          How to use
+        </h3>
+        <ol class="steps">
+          <li>
+            <strong>After the challenge is known</strong>, fill each doc using
+            the skills in the recommended order.
+          </li>
+          <li>
+            <strong>Trace forward</strong>: pick a row in the Problem Brief
+            column and verify the corresponding columns in Architecture, Tasks,
+            Test, and Demo are covered.
+          </li>
+          <li>
+            <strong>Trace backward</strong>: pick a scorecard criterion and
+            verify there is evidence (or at least a plan) in the upstream docs.
+          </li>
+          <li>
+            <strong>If a link is missing</strong>, either the doc needs an
+            update or the scope needs an explicit cut decision in
+            <code>task-board.md</code>.
+          </li>
+        </ol>
+
+        <h3 style="font-size: 18px; margin: 30px 0 14px">
+          Row-by-row trace
+        </h3>
+        <div class="table-wrap">
+          <table class="trace-table">
+            <thead>
+              <tr>
+                <th>Problem brief</th>
+                <th>Architecture &amp; API</th>
+                <th>Tasks &amp; tests</th>
+                <th>Demo &amp; judging</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Challenge statement</td>
+                <td>
+                  Request flow <span class="ref">(architecture.md)</span>
+                </td>
+                <td>Now tasks <span class="ref">(task-board.md)</span></td>
+                <td>Demo hook <span class="ref">(demo-script.md)</span></td>
+              </tr>
+              <tr>
+                <td>Target user / pain</td>
+                <td>Components <span class="ref">(architecture.md)</span></td>
+                <td>First slice implemented</td>
+                <td>User pain shown in demo</td>
+              </tr>
+              <tr>
+                <td>Demo proof metric</td>
+                <td>
+                  API endpoint response field(s)
+                  <span class="ref">(api-contract.md)</span>
+                </td>
+                <td>Test: happy path asserts value matches metric</td>
+                <td>
+                  Proof metric on screen <span class="arrow">→</span>
+                  Judge-visible evidence <span class="arrow">→</span> Scorecard
+                  criterion
+                </td>
+              </tr>
+              <tr>
+                <td>MVP scope (Must ship)</td>
+                <td>
+                  Endpoint table + Data model
+                  <span class="ref">(api-contract / architecture)</span>
+                </td>
+                <td>
+                  Task outcome &amp; acceptance check
+                  <span class="ref">(task-board.md)</span>
+                </td>
+                <td>
+                  Live demo flow <span class="arrow">→</span> Working Product
+                  criterion
+                </td>
+              </tr>
+              <tr>
+                <td>Constraints</td>
+                <td>Config &amp; secrets <span class="ref">(architecture)</span></td>
+                <td>Cut list items</td>
+                <td>Q&amp;A: why not built?</td>
+              </tr>
+              <tr>
+                <td>Assumptions</td>
+                <td>Tradeoffs <span class="ref">(architecture)</span></td>
+                <td>Test: known gaps</td>
+                <td>Honest limitations</td>
+              </tr>
+              <tr>
+                <td>Production path</td>
+                <td>
+                  Production path section
+                  <span class="ref">(architecture.md)</span>
+                </td>
+                <td>Later tasks</td>
+                <td>
+                  Pitch: next steps <span class="arrow">→</span> Technical
+                  credibility
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3 style="font-size: 18px; margin: 36px 0 14px">
+          Example trace (post-challenge)
+        </h3>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>From</th>
+                <th>To</th>
+                <th>Evidence location</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Challenge: “Reduce order-to-ship time”</td>
+                <td>
+                  API <code>POST /orders</code> returns
+                  <code>processing_time</code> field
+                </td>
+                <td><code>docs/api-contract.md</code> endpoint table</td>
+              </tr>
+              <tr>
+                <td>Demo proof metric: “25% faster”</td>
+                <td>
+                  Test asserts
+                  <code>response.processing_time &lt; baseline</code>
+                </td>
+                <td><code>docs/test-plan.md</code> critical journey</td>
+              </tr>
+              <tr>
+                <td>Working Product criterion (10 pts)</td>
+                <td>One-click demo flow with visible before/after metric</td>
+                <td>
+                  <code>docs/demo-script.md</code> live flow +
+                  <code>docs/judging-scorecard.md</code> evidence column
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="callout" style="margin-top: 30px">
+          <strong>Note:</strong> The traceability map is a verification tool,
+          not a new document to fill. Use it during final review to confirm
+          nothing is orphaned.
+        </div>
+      </section>
+
+      <footer class="page-foot">
+        <span>docs/README · planning &amp; pitch artifacts</span>
+        <span>handoff contract · judging evidence trail</span>
+      </footer>
+    </main>
+
+    <script>
+      (function () {
+        var STORAGE_KEY = "docs-readiness-v1";
+        var items = Array.prototype.slice.call(
+          document.querySelectorAll("#checkList li")
+        );
+        var fill = document.getElementById("progressFill");
+        var count = document.getElementById("progressCount");
+        var state = document.getElementById("progressState");
+        var resetBtn = document.getElementById("resetBtn");
+
+        function load() {
+          var saved = {};
+          try {
+            saved = JSON.parse(localStorage.getItem(STORAGE_KEY) || "{}");
+          } catch (e) {
+            saved = {};
+          }
+          items.forEach(function (li) {
+            var id = li.getAttribute("data-id");
+            if (saved[id]) {
+              li.classList.add("checked");
+            }
+          });
+        }
+
+        function save() {
+          var data = {};
+          items.forEach(function (li) {
+            if (li.classList.contains("checked")) {
+              data[li.getAttribute("data-id")] = true;
+            }
+          });
+          try {
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+          } catch (e) {}
+        }
+
+        function render() {
+          var done = items.filter(function (li) {
+            return li.classList.contains("checked");
+          }).length;
+          var total = items.length;
+          var pct = Math.round((done / total) * 100);
+          fill.style.width = pct + "%";
+          fill.style.background = pct === 100 ? "#788c5d" : "#d97757";
+          count.textContent = done + " / " + total + " ready";
+          if (done === total) {
+            state.classList.add("show");
+          } else {
+            state.classList.remove("show");
+          }
+        }
+
+        items.forEach(function (li) {
+          li.addEventListener("click", function (e) {
+            // ignore clicks on actual link/code if any were added later
+            li.classList.toggle("checked");
+            save();
+            render();
+          });
+        });
+
+        resetBtn.addEventListener("click", function () {
+          items.forEach(function (li) {
+            li.classList.remove("checked");
+          });
+          save();
+          render();
+        });
+
+        load();
+        render();
+      })();
+    </script>
+  </body>
+</html>

@@ -1,10 +1,14 @@
 # Judging Scorecard
 
+> **Status:** Draft · **Owner:** Team · **Audience:** Team + judges · **Updated:** Scaffold
+
 Core judging idea: score the real use of AI across the Software Development Life Cycle (SDLC), not just how many product features were shipped.
 
 Use this file as the final project starter checklist. Keep the `Score` column at `0-5`, then calculate weighted points as `Score / 5 * Weight`.
 
 ## Official Weighted Rubric
+
+<!-- Fill Score (0-5) and Weighted points after the demo slice is built and verified. Score = 0-5 per criterion. Weighted points = Score / 5 * Weight. Judge-visible evidence should be concrete and referenceable from the docs. -->
 
 | Criterion                                | Weight | Score | Weighted points | Judge-visible evidence                                                                                                                                                            | Next fix                                                                                           |
 | ---------------------------------------- | -----: | ----: | --------------: | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- |

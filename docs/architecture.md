@@ -1,6 +1,6 @@
 # Architecture
 
-Status: draft
+> **Status:** Draft · **Owner:** solution-architect / backend-node · **Audience:** Team + judges · **Updated:** Scaffold
 
 ## Stack
 
@@ -11,12 +11,12 @@ Status: draft
 
 ## Components
 
-| Component | Responsibility | Owner |
-| --- | --- | --- |
-| Next.js UI | Demo workflow and visualization | frontend-nextjs |
-| Fastify API | Business logic, Zod validation, typed JSON contract | backend-node |
-| Storage | Hackathon default: in-memory; production replacement later | backend-node |
-| Integrations | Company systems / MCP / mock adapters | backend-node |
+| Component    | Responsibility                                             | Owner           |
+| ------------ | ---------------------------------------------------------- | --------------- |
+| Next.js UI   | Demo workflow and visualization                            | frontend-nextjs |
+| Fastify API  | Business logic, Zod validation, typed JSON contract        | backend-node    |
+| Storage      | Hackathon default: in-memory; production replacement later | backend-node    |
+| Integrations | Company systems / MCP / mock adapters                      | backend-node    |
 
 ## Request flow
 
@@ -27,7 +27,18 @@ Status: draft
 
 ## Data model
 
-Document the entities the slice touches here. Keep storage behind one module so the later DB swap is a one-file change.
+<!-- When filling for your challenge, document the entities (with fields and types) the demo slice touches. Use the glossary from CONTEXT.md if it exists. Keep storage behind one module interface so the later DB swap is a one-file change. Example: -->
+
+```typescript
+// apps/api/src/lib/store.ts
+interface Order {
+  id: string
+  item: string
+  quantity: number
+  status: "pending" | "completed"
+  createdAt: string
+}
+```
 
 ## Config & secrets
 
@@ -42,7 +53,7 @@ Every tunable reads `process.env` with a safe default. Current: `PORT ?? 8080`, 
 
 ## Key tradeoffs
 
-| Decision | Why | Risk | Mitigation |
-| --- | --- | --- | --- |
-| In-memory store for MVP | Fastest vertical slice | Data resets on restart | Keep API contract stable for later DB swap |
-| Plain-string errors in starter | Speed | No machine-readable errors for UI | New routes use the JSON error shape in `docs/api-contract.md` |
+| Decision                       | Why                    | Risk                              | Mitigation                                                    |
+| ------------------------------ | ---------------------- | --------------------------------- | ------------------------------------------------------------- |
+| In-memory store for MVP        | Fastest vertical slice | Data resets on restart            | Keep API contract stable for later DB swap                    |
+| Plain-string errors in starter | Speed                  | No machine-readable errors for UI | New routes use the JSON error shape in `docs/api-contract.md` |

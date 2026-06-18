@@ -1,5 +1,11 @@
 # Task Board
 
+> **Status:** Draft · **Owner:** product-strategist · **Audience:** Team · **Updated:** Scaffold
+
+<!-- Fill these lists after running /task-slicer with the real challenge parameters.
+     Each task should have: outcome, files likely touched, acceptance check, effort (S/M/L), owner.
+     Keep the first task as a complete vertical slice (UI → API → proof metric). -->
+
 ## Now
 
 - [ ] `/grill-with-docs` — optional, run first if domain terms are fuzzy.
@@ -22,6 +28,6 @@
 
 ## Cut list
 
-Use this to protect demo time. Move Should-ship items here the moment you're behind.
+<!-- Move Should-ship items here the moment you're behind. The cut list is your demo-protection tool — use it aggressively. Mark items with the date they were cut and why. -->
 
-- [ ]
+- [ ] Example: "[date] — Moved from Should-ship to Cut to protect demo freeze. Reason: not enough time to implement, test, and rehearse."

@@ -1,5 +1,7 @@
 # API Contract
 
+> **Status:** Draft · **Owner:** backend-node · **Audience:** Team (backend + frontend) · **Updated:** Scaffold
+
 Base URL: `http://localhost:8080` (the web app reads it from env). Start the API with `make dev-node`.
 
 ## Error shape (target for new routes)
@@ -37,6 +39,8 @@ Responses: `200 "Logged-In"` · `400 "bad request"` (validation) · `401 "unauth
 ## Endpoints for the demo slice
 
 Add one row per endpoint the next slice needs — no more.
+
+> **When filling for your challenge:** Add one row per endpoint the demo slice needs. Keep it minimal — every field must be rendered by the UI. Example: `POST /orders` → `{ "item": "...", "qty": 1 }` → `{ "id": "...", "status": "created" }` → 201. Include only endpoints needed for the live demo; remove starter-only routes like `/login` when replacing the demo.
 
 | Method | Path | Purpose | Request | Response | Status |
 | --- | --- | --- | --- | --- | --- |
