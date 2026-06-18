@@ -1,15 +1,16 @@
 # Judging Scorecard
 
-Score each 1-5.
+Core judging idea: score the real use of AI across the Software Development Life Cycle (SDLC), not just how many product features were shipped.
 
-| Criterion | Score | Evidence | Next fix |
-| --- | ---: | --- | --- |
-| Problem clarity | | | |
-| User value | | | |
-| Working demo | | | |
-| Technical quality | | | |
-| Innovation | | | |
-| Production path | | | |
-| Presentation | | | |
+Use this file as the final project starter checklist. Keep the `Score` column at `0-5`, then calculate weighted points as `Score / 5 * Weight`.
 
-Highest ROI fix:
+## Official Weighted Rubric
+
+| Criterion                                | Weight | Score | Weighted points | Judge-visible evidence                                                                                                                                                            | Next fix                                                                                           |
+| ---------------------------------------- | -----: | ----: | --------------: | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- |
+| AI SDLC Workflow & Impact                |     40 |       |                 | AI used across problem framing, architecture, API contract, task slicing, implementation, testing, and demo story; measurable before/after impact captured in docs and on screen. | Fill `docs/problem-brief.md`, then run the full skill sequence through `/demo-story`.              |
+| AI Engineering Process & Context Mgmt    |     18 |       |                 | Reusable rules, skills, agents, settings, API contracts, and docs that preserve project context and can be reused by teammates or judges.                                         | Keep `.claude/skills/`, `.claude/agents/`, `CLAUDE.md`, and docs synchronized with the real slice. |
+| Engineering & Deliverability             |     15 |       |                 | Fastify + Zod API, Next.js UI, typed contract, focused tests, build, smoke check, safe env config, no secrets read or exposed.                                                    | Run `make test`, `make build`, and `make smoke`; update `docs/test-plan.md`.                       |
+| Human-in-the-Loop (HITL)                 |     10 |       |                 | Plannotator review/annotation loop for AI plans, docs, and code changes; humans can approve, reject, or annotate AI output before implementation or final delivery.               | Use Plannotator on plans/docs/worktree and record accepted/rejected changes.                       |
+| Working Product & Demo Readiness         |     10 |       |                 | One judge-understandable journey: headline, value proposition, primary action, result area, proof metric, fallback script.                                                        | Implement one complete vertical slice and rehearse `docs/demo-script.md`.                          |
+| Innovation / Agentic Workflow & Autonomy |      7 |       |                 | Multi-agent workflow using specialized agents and autonomous loops with verification gates.                                                                                       | Show which agents ran, what they produced, and how verification closed the loop.                   |
