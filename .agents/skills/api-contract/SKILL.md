@@ -10,9 +10,9 @@ Update `docs/api-contract.md`. Backend and frontend implement against this file 
 
 ## Load domain context
 
-Read **`CONTEXT.md`** (and `CONTEXT-MAP.md` if present) before designing endpoints. Use the canonical glossary terms for resource names, field names, and URL path segments. Consistent terminology across the API contract, frontend fetch calls, and test names prevents wiring bugs — a mismatch between "Order" in the glossary and "purchase" in the URL is exactly the kind of guesswork that creates demo-day failures.
+Read **`CONTEXT.md`** (and `CONTEXT-MAP.md` if present), `docs/problem-brief.md`, and `docs/architecture.md` before designing endpoints. Use the canonical glossary terms for resource names, field names, and URL path segments, and honor the component/storage boundaries from the architecture. Consistent terminology across the API contract, frontend fetch calls, and test names prevents wiring bugs — a mismatch between "Order" in the glossary and "purchase" in the URL is exactly the kind of guesswork that creates demo-day failures.
 
-If `CONTEXT.md` is absent, fall back to `docs/problem-brief.md` and `docs/architecture.md`.
+If `CONTEXT.md` is absent, rely on `docs/problem-brief.md` and `docs/architecture.md`.
 
 ## Match the real server
 
@@ -29,7 +29,7 @@ The starter at `apps/api/src/server.ts` already shows the patterns — follow th
 1. **Endpoint table** — method, path, purpose, request body, response, status codes. Include `GET /healthz` (already exists → `{ ok: true, service: "api-node" }`).
 2. **Error shape** — one consistent JSON shape, e.g. `{ "error": { "code": "validation_error", "message": "..." } }`. `400` validation, `401`/`403` auth, `404` missing, `500` unexpected.
 3. **Validation rules** — the Zod constraints per field (lengths, formats), written so they can be lifted straight into a schema.
-4. **Example JSON** — happy-path request and response for the demo slice.
+4. **Example JSON** — happy-path request and response for the demo slice, specific enough to become frontend mocks/fixtures.
 5. **Frontend fetch notes** — base URL (`/api` proxy or `http://localhost:8080`), the env var the web app reads, and how errors surface in the UI.
 
 ## Rules

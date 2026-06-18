@@ -12,6 +12,14 @@ Update `docs/demo-script.md` and `docs/pitch.md`. Judges remember a story and a 
 
 Read **`CONTEXT.md`** (and `CONTEXT-MAP.md` if present) before writing the script. Use canonical glossary terms throughout the pitch, demo script, and Q&A — consistent terminology makes the demo sound polished and credible. A pitch that says "Customer places an Order" (per the glossary) is more coherent than one that switches between "client," "buyer," and "user."
 
+Also read the workflow artifacts that prove what is actually demoable:
+
+- `docs/problem-brief.md` — user pain, MVP, proof metric, demo wow moment.
+- `docs/task-board.md` — completed slices, cut list, screenshots/checkpoints, and next-build honesty.
+- `docs/test-plan.md` — tested critical journey, smoke status, remaining demo risks.
+- `docs/architecture.md` — production path and credible technical decision.
+- `docs/judging-scorecard.md` — rubric language for Q&A.
+
 If `CONTEXT.md` is absent, rely on `docs/problem-brief.md`.
 
 ## Pitch structure
@@ -19,7 +27,7 @@ If `CONTEXT.md` is absent, rely on `docs/problem-brief.md`.
 1. **One-line problem + user.** Who hurts, and how much.
 2. **Why the current workflow is painful** — the workaround they use today.
 3. **What the product does** — one sentence a non-engineer can repeat.
-4. **Live demo flow** — the exact clicks, scripted.
+4. **Live demo flow** — the exact clicks, scripted from the completed task-board slice/checkpoint only.
 5. **Measurable impact** — the proof metric from `docs/problem-brief.md`, shown on screen.
 6. **Why it can become production** — point at the production path in `docs/architecture.md`.
 7. **What you'd build next.**
@@ -30,9 +38,9 @@ If `CONTEXT.md` is absent, rely on `docs/problem-brief.md`.
 - **No architecture deep-dive** unless a judge asks. Mention one credible technical decision only.
 - **Be honest about limits**, framed as next-step plans, not apologies.
 - **Prep Q&A** on security, scalability, adoption, and data quality — cross-check `docs/judging-scorecard.md` so your answers map onto the criteria that get scored.
-- **Have a fallback** — a screen recording or local data so a live failure doesn't end the demo.
+- **Have a fallback** — a screen recording, screenshot from a task-board checkpoint, or local data so a live failure doesn't end the demo.
 
 ## Output
 
-- Updated `docs/demo-script.md` (opening, 3-minute flow, fallback, judge Q&A) and `docs/pitch.md`.
-- Next step: rehearse with the `pitch-coach` subagent; run `/test-fast` to lock the demo path.
+- Updated `docs/demo-script.md` (opening, 3-minute flow, fallback, judge Q&A) and `docs/pitch.md`, grounded in completed task-board checkpoints and tested demo evidence.
+- Next step: rehearse with the `pitch-coach` subagent; run `/test-fast` first if the latest task-board checkpoint has not been verified.

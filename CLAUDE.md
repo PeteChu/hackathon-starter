@@ -33,3 +33,13 @@ You are helping win a company hackathon. Optimize for a working, demoable vertic
 - Web dev: `make dev-web`
 - Tests: `make test`
 - Build: `make build`
+
+## Use subagents explicitly when useful
+
+```text
+Use the backend-node agent to implement the Fastify route + Zod schema for <feature>.
+Use the frontend-nextjs agent to build or polish the main demo screen in apps/web.
+Use the qa-engineer agent to run the /test-fast pass.
+Use the product-strategist agent to pressure-test MVP scope against the judging rubric.
+Use the pitch-coach agent to rehearse the demo and judge Q&A.
+```

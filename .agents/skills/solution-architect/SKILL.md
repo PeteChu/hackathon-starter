@@ -10,7 +10,7 @@ Update `docs/architecture.md`. This is the bridge between the problem and the co
 
 ## Load domain context
 
-Before designing, read **`CONTEXT.md`** (and `CONTEXT-MAP.md` if present) to anchor your architecture in the project's canonical domain language. Use the glossary terms for entity names, field names, and relationships in the data model and request flow sections. If `CONTEXT.md` is absent, rely on `docs/problem-brief.md`.
+Before designing, read **`CONTEXT.md`** (and `CONTEXT-MAP.md` if present) to anchor your architecture in the project's canonical domain language. Use the glossary terms for entity names, field names, and relationships in the data model and request flow sections. Also scan `docs/adr/*.md` if present; ADRs created by `/grill-with-docs` are decision constraints, not optional background. If `CONTEXT.md` is absent, rely on `docs/problem-brief.md`.
 
 > **Keep `CONTEXT.md` clean.** Do not push implementation decisions, storage choices, or architecture details into `CONTEXT.md` — those belong in `docs/architecture.md`. `CONTEXT.md` is a glossary only.
 
@@ -55,6 +55,7 @@ If none apply, stay in-memory and skip the rest of this section.
 4. **Config & secrets** — every tunable reads `process.env` with a safe default (the starter already does `PORT ?? 8080` and `CORS_ORIGIN ?? 'http://localhost:3000'`). Never hardcode credentials; mirror any new var in `.env.example` with a placeholder. If a real DB is chosen, add its connection var (`DATABASE_URL` for Postgres, `MONGODB_URI` for Mongo) as a **placeholder pointing at a local default** — never a real credential.
 5. **Production path** — 4–5 concrete bullets on what changes after the hackathon (real DB, authn/authz + audit, observability, deploy behind the company gateway). Judges score this criterion, so be specific, not aspirational.
 6. **Key tradeoffs** — one table: decision / why / risk / mitigation. The in-memory-store-for-speed tradeoff is the canonical entry; add a row for the storage decision (PostgreSQL vs MongoDB / why: chosen by data shape / risk: wrong pick forces rework mid-hackathon / mitigation: store behind the module interface so a swap stays one-file).
+7. **Task-slicer handoff boundaries** — name which components/files can be implemented independently, which shared contracts must be fixed before parallel work, and which changes are risky enough to serialize.
 
 ## Rules
 
@@ -65,6 +66,6 @@ If none apply, stay in-memory and skip the rest of this section.
 
 ## Output
 
-- Updated `docs/architecture.md` with every section filled (no empty headers), including the **storage decision** (in-memory / self-hosted PostgreSQL / self-hosted MongoDB) and the result of the **external-service-permission check**.
+- Updated `docs/architecture.md` with every section filled (no empty headers), including the **storage decision** (in-memory / self-hosted PostgreSQL / self-hosted MongoDB), the result of the **external-service-permission check**, and handoff boundaries for `/task-slicer`.
 - One line naming the riskiest component to build first.
 - Next step: run `/api-contract` to fix the endpoint shapes.
