@@ -7,7 +7,9 @@ help:
 	@echo "  make install          Install local dependencies where possible"
 	@echo "  make dev-node         Run Node API on :8080"
 	@echo "  make dev-web          Run Next.js UI on :3000"
-	@echo "  make test             Run tests and available Node/Web checks"
+	@echo "  make test             Run Node tests + web typecheck"
+	@echo "  make test-e2e         Run Playwright E2E tests (headless)"
+	@echo "  make test-e2e-ui      Run Playwright E2E tests (headed)"
 	@echo "  make build            Build API and UI"
 	@echo "  make smoke            Run API smoke checks against API_URL or localhost:8080"
 
@@ -38,7 +40,16 @@ dev-web:
 dev: 
 	pnpm run dev
 
-test: test-node
+test: test-node test-web-typecheck
+	@if [ -d apps/web/node_modules ]; then echo "Web deps OK"; else echo "Skipping web tests; run make install-web first"; fi
+
+test-e2e:
+	@if [ -d apps/web/node_modules ]; then cd apps/web && pnpm run test:e2e; else echo "Skipping E2E tests; run make install-web first"; fi
+
+test-e2e-ui:
+	@if [ -d apps/web/node_modules ]; then cd apps/web && pnpm run test:e2e:ui; else echo "Skipping E2E tests (headed); run make install-web first"; fi
+
+test-web-typecheck:
 	@if [ -d apps/web/node_modules ]; then cd apps/web && pnpm run typecheck; else echo "Skipping web typecheck; run make install-web first"; fi
 
 
