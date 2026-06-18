@@ -2,6 +2,7 @@
 
 ## Now
 
+- [ ] `/grill-with-docs` — optional, run first if domain terms are fuzzy.
 - [ ] `/problem-framer` with the official challenge.
 - [ ] `/solution-architect`.
 - [ ] `/api-contract`.

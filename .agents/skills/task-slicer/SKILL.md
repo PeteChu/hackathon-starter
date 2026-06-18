@@ -8,11 +8,17 @@ argument-hint: "[available hours, team size, judging criteria]"
 
 Update `docs/task-board.md`. This is where you defend demo time against scope creep — the single most common way hackathons fail is a board full of half-finished features.
 
+## Load domain context
+
+Read **`CONTEXT.md`** (and `CONTEXT-MAP.md` if present) before slicing. Use canonical glossary terms in task outcomes and acceptance checks — a task outcome like "Customer places an Order" is clearer and more consistent than "user creates a purchase" when the glossary defines those terms precisely. This alignment prevents confusion between teammates and keeps the demo narrative consistent.
+
+If `CONTEXT.md` is absent, rely on `docs/problem-brief.md`.
+
 ## Task shape
 
 Each task gets:
 
-- **Outcome** — a user-visible result, not "set up the database." If a judge can't see it, it's not the outcome.
+- **Outcome** — a user-visible result, not "set up the database." If a judge can't see it, it's not the outcome. Use canonical terminology from `CONTEXT.md` where applicable.
 - **Files likely touched** — e.g. `apps/api/src/server.ts`, `apps/web/app/page.tsx`, a new test file.
 - **Acceptance check** — one sentence a teammate can verify, ideally by eye on the demo screen.
 - **Effort** — S / M / L.

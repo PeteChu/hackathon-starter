@@ -11,7 +11,7 @@ Implement only the requested slice. Do not refactor unrelated code — that's ho
 
 ## Workflow
 
-1. **Load context** — read `docs/problem-brief.md`, `docs/architecture.md`, `docs/api-contract.md`, and the slice's row in `docs/task-board.md`.
+1. **Load context** — read `docs/problem-brief.md`, `docs/architecture.md`, `docs/api-contract.md`, the slice's row in `docs/task-board.md`, and **`CONTEXT.md` (if present)**. Use canonical glossary terms in variable names, route paths, and test descriptions. If `CONTEXT-MAP.md` exists, read it to understand multi-context boundaries.
 2. **Find the smallest file set.** Typically: one Fastify route in `apps/api/src/server.ts`, one Next.js route or page under `apps/web/app/`, and one test.
 3. **Backend first.** Add the route with Zod validation and typed JSON, following the patterns already in `server.ts` (`z.safeParse`, `reply.code`). Read any secret from `process.env` — never hardcode credentials, and mirror new vars in `.env.example`.
 4. **Test as you go.** Add a vitest test against `buildServer()` — one happy path and one validation failure. Run `make test` to confirm.

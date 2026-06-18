@@ -9,6 +9,7 @@ Project subagents live in `.claude/agents/*.md`. Restart the Claude Code session
 Run these in order — each writes or updates a doc in `docs/`:
 
 ```text
+/grill-with-docs                          ← optional prelude (fuzzy domain / new cycle)
 /problem-framer <challenge>
 /solution-architect
 /api-contract
@@ -17,6 +18,12 @@ Run these in order — each writes or updates a doc in `docs/`:
 /test-fast
 /demo-story
 ```
+
+`/grill-with-docs` is the optional context-gathering gateway. It produces
+`CONTEXT.md` (a domain glossary) and, when warranted, ADRs in `docs/adr/`.
+Every downstream skill reads `CONTEXT.md` when present to keep terminology
+consistent. Use it when the problem domain uses unfamiliar terms, or when
+you're starting a new feature cycle and want to re-anchor the vocabulary.
 
 ## Use subagents explicitly when useful
 

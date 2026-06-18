@@ -8,6 +8,12 @@ argument-hint: "[demo length, judging rubric]"
 
 Update `docs/demo-script.md` and `docs/pitch.md`. Judges remember a story and a number — not a feature list.
 
+## Load domain context
+
+Read **`CONTEXT.md`** (and `CONTEXT-MAP.md` if present) before writing the script. Use canonical glossary terms throughout the pitch, demo script, and Q&A — consistent terminology makes the demo sound polished and credible. A pitch that says "Customer places an Order" (per the glossary) is more coherent than one that switches between "client," "buyer," and "user."
+
+If `CONTEXT.md` is absent, rely on `docs/problem-brief.md`.
+
 ## Pitch structure
 
 1. **One-line problem + user.** Who hurts, and how much.

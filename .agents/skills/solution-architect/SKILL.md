@@ -8,6 +8,12 @@ argument-hint: "[problem-brief summary or feature focus]"
 
 Update `docs/architecture.md`. This is the bridge between the problem and the code: it fixes the build approach before anyone writes a route or a component, so backend and frontend can move in parallel without rework.
 
+## Load domain context
+
+Before designing, read **`CONTEXT.md`** (and `CONTEXT-MAP.md` if present) to anchor your architecture in the project's canonical domain language. Use the glossary terms for entity names, field names, and relationships in the data model and request flow sections. If `CONTEXT.md` is absent, rely on `docs/problem-brief.md`.
+
+> **Keep `CONTEXT.md` clean.** Do not push implementation decisions, storage choices, or architecture details into `CONTEXT.md` — those belong in `docs/architecture.md`. `CONTEXT.md` is a glossary only.
+
 ## Ground truth for this repo
 
 The stack is already decided — don't re-litigate it, just design within it:

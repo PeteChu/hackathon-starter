@@ -1,6 +1,6 @@
 ---
 name: grill-with-docs
-description: Grilling session that challenges your plan against the existing domain model, sharpens terminology, and updates documentation (CONTEXT.md, ADRs) inline as decisions crystallise. Use when user wants to stress-test a plan against their project's language and documented decisions.
+description: Grilling session that challenges your plan against the existing domain model, sharpens terminology, and updates documentation (CONTEXT.md, ADRs) inline as decisions crystallise. Use as the optional context-gathering prelude before /problem-framer in the AI SDLC workflow, or at the start of a new requirement/feature cycle to establish a shared domain vocabulary.
 ---
 
 <what-to-do>
@@ -12,6 +12,28 @@ Ask the questions one at a time, waiting for feedback on each question before co
 If a question can be answered by exploring the codebase, explore the codebase instead.
 
 </what-to-do>
+
+<ai-sdlc-role>
+
+This skill is the **context-gathering prelude** to the full AI SDLC workflow. It runs **before** `/problem-framer` when:
+
+- Domain terminology is fuzzy or undefined
+- A new requirement or feature starts a new development cycle
+- You want to stress-test assumptions against existing documentation
+
+**Outputs consumed by downstream skills:**
+
+- `CONTEXT.md` (glossary of canonical terms) — read by `/problem-framer`, `/solution-architect`, `/api-contract`, `/task-slicer`, `/implement-vertical-slice`, `/test-fast`, and `/demo-story`
+- `CONTEXT-MAP.md` (multiple contexts, if applicable) — same consumers
+- `docs/adr/*.md` (architecture decision records, if created) — primarily read by `/solution-architect`
+
+**What this skill is NOT:**
+
+- It is NOT a spec — `CONTEXT.md` is a glossary only, devoid of implementation details
+- It is NOT a replacement for `/problem-framer` — the problem brief lives in `docs/problem-brief.md`, authored by that skill
+- It is NOT a design document — architecture decisions belong in `docs/architecture.md`, authored by `/solution-architect`
+
+</ai-sdlc-role>
 
 <supporting-info>
 

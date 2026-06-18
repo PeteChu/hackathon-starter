@@ -9,7 +9,7 @@ The kit gives you two things:
 1. **A working stack out of the box** — Next.js 16 + Fastify 5 + Zod, typed data,
    testable handlers, env-based config, and a minimal demo so the whole thing
    runs end-to-end on first `make`.
-2. **A guided workflow** — project skills (`/problem-framer`, `/solution-architect`,
+2. **A guided workflow** — project skills (`/grill-with-docs`, `/problem-framer`, `/solution-architect`,
    `/api-contract`, …) and specialized subagents (`backend-node`, `frontend-nextjs`,
    `qa-engineer`, …) that fill in the planning docs and implement the slice with you.
 
@@ -51,6 +51,8 @@ Run these in order from Claude Code in this repo — each writes or updates a do
 in `docs/`, so the planning trail stays intact:
 
 ```text
+/grill-with-docs                        ← optional: context-gathering prelude
+  (when domain terms are fuzzy or a new feature cycle begins)
 /problem-framer <your challenge>
 /solution-architect
 /api-contract
@@ -59,6 +61,20 @@ in `docs/`, so the planning trail stays intact:
 /test-fast
 /demo-story
 ```
+
+**`/grill-with-docs`** is an optional discovery phase that runs before
+`/problem-framer`. It interviews you about the domain, sharpens terminology,
+and produces `CONTEXT.md` — a shared glossary that every downstream skill can
+reference. Use it when:
+
+- The challenge uses unfamiliar or overloaded domain terms.
+- You're starting a new feature cycle and want to re-establish vocabulary.
+- You want to stress-test assumptions against existing documentation before
+  committing to a problem brief.
+
+Every downstream skill (`/problem-framer` through `/demo-story`) will
+read `CONTEXT.md` when present to keep terminology consistent across all
+planning docs.
 
 ## Replace the demo
 
@@ -69,7 +85,8 @@ The placeholder demo is confined to a small, easily-deleted file set:
 - `apps/web/app/page.tsx`, `apps/web/lib/api.ts`
 - `apps/api/src/ideas.test.ts`
 
-Delete those, run `/problem-framer` with your real challenge, and the workflow
+Delete those, run `/grill-with-docs` first (if the domain needs glossary sharpening),
+then `/problem-framer` with your real challenge, and the workflow
 rebuilds the slice on top of the same stack.
 
 ## Adding UI components

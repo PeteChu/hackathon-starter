@@ -1,6 +1,6 @@
 ---
 name: problem-framer
-description: Turn a vague hackathon challenge into a crisp problem brief — target user, painful job, success metric, MVP scope, assumptions, and a demo wow moment — and write docs/problem-brief.md. Use at the very start of a hackathon, whenever requirements are unclear, or before running /solution-architect.
+description: Turn a vague hackathon challenge into a crisp problem brief — target user, painful job, success metric, MVP scope, assumptions, and a demo wow moment — and write docs/problem-brief.md. Use at the very start of a hackathon, whenever requirements are unclear, or before running /solution-architect. Run /grill-with-docs first when domain terminology is fuzzy or a new development cycle begins.
 argument-hint: "[challenge text, judging criteria, constraints]"
 ---
 
@@ -8,9 +8,13 @@ argument-hint: "[challenge text, judging criteria, constraints]"
 
 Create or update `docs/problem-brief.md`. Every later skill reads this file, so getting the problem sharp here is the highest-leverage 15 minutes of the hackathon — a fuzzy brief cascades into fuzzy architecture, fuzzy tasks, and a fuzzy demo.
 
+> **Prefer `/grill-with-docs` first when domain language is unclear.** If the problem space uses unfamiliar, vague, or overloaded terms, run `/grill-with-docs` before this skill — it establishes a shared glossary in `CONTEXT.md` that this skill (and every downstream skill) can reference for precise terminology.
+
 ## Gather inputs
 
-Read whatever exists before asking the user: the challenge statement, `docs/judging-scorecard.md`, the README, and any screenshots or notes that were pasted in. Pull the judging criteria into the brief verbatim — they define what "winning" means, so every scope decision should trace back to them.
+Read whatever exists before asking the user: the challenge statement, `docs/judging-scorecard.md`, the README, **`CONTEXT.md` (if present)**, and any screenshots or notes that were pasted in. Pull the judging criteria into the brief verbatim — they define what "winning" means, so every scope decision should trace back to them. Use canonical terms from `CONTEXT.md` when filling out the brief; if a term conflicts, flag it as an assumption.
+
+If `CONTEXT.md` does not exist yet and the domain feels fuzzy, recommend the user run `/grill-with-docs` first.
 
 ## Fill the brief
 

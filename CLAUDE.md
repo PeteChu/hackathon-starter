@@ -10,6 +10,7 @@ You are helping win a company hackathon. Optimize for a working, demoable vertic
 4. Use Next.js for the demo UI. Make it understandable in 10 seconds: headline, value proposition, primary action, results area, and proof metric.
 5. Every implementation task must end with verification: run a focused test, typecheck/build.
 6. Update docs as you go: problem brief, architecture, task board, test plan, and demo script.
+7. When `CONTEXT.md` exists at the project root, read it before starting any SDLC skill — it establishes canonical domain terminology that keeps problem briefs, architecture, API contracts, tasks, tests, and demo scripts aligned. Update it through `/grill-with-docs`, not manually.
 
 ## Constraints
 

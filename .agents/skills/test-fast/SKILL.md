@@ -12,7 +12,9 @@ Focus only on tests that prevent demo embarrassment. A hackathon doesn't need co
 
 ## Steps
 
-1. **Read what changed** — the slice's files and `docs/api-contract.md`.
+1. **Load context** — read `docs/api-contract.md`, the slice's files, and **`CONTEXT.md` (if present)**. Use canonical glossary terms in test descriptions and manual checklist items — aligning test language with the domain glossary reduces confusion and catches naming mismatches between what the code calls a thing and what the team calls it.
+
+   If a test description uses a term that conflicts with `CONTEXT.md`, that's a signal the code or the test may be using the wrong term — flag it.
 2. **One happy-path + one failure test.** Test Fastify routes against `buildServer()` with vitest (no need to boot a port). Branch `z.safeParse` on `result.success` and cover the failure branch — it's the most common demo-time bug. If the store is module-level, reset it in `afterEach` so tests stay isolated.
 3. **Narrowest command first** — `make test` (runs the API tests). Then `make build` for a frontend typecheck/build.
 4. **Smoke the running system** — with `make dev-node` up, run `make smoke`. It curls `/healthz` and `/login` and catches wiring, CORS, and config bugs that unit tests miss.

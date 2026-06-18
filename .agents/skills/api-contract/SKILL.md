@@ -8,6 +8,12 @@ argument-hint: "[feature or entity name]"
 
 Update `docs/api-contract.md`. Backend and frontend implement against this file in parallel, so it has to be exact enough that neither side has to guess — a guessed contract is the most common source of demo-day wiring bugs.
 
+## Load domain context
+
+Read **`CONTEXT.md`** (and `CONTEXT-MAP.md` if present) before designing endpoints. Use the canonical glossary terms for resource names, field names, and URL path segments. Consistent terminology across the API contract, frontend fetch calls, and test names prevents wiring bugs — a mismatch between "Order" in the glossary and "purchase" in the URL is exactly the kind of guesswork that creates demo-day failures.
+
+If `CONTEXT.md` is absent, fall back to `docs/problem-brief.md` and `docs/architecture.md`.
+
 ## Match the real server
 
 The starter at `apps/api/src/server.ts` already shows the patterns — follow them, don't invent new ones:
