@@ -1,48 +1,54 @@
-# shadcn/ui monorepo template
+# CJ Hackathon Kit
 
-This is a Next.js monorepo template with shadcn/ui.
+A **hackathon starter kit**: a production-shaped Next.js + Fastify monorepo
+paired with a Claude Code "kit" of skills and subagents that take a team from a
+vague challenge to a working, demoable vertical slice — fast.
 
-## Adding components
+The kit gives you two things:
 
-To add components to your app, run the following command at the root of your `web` app:
+1. **A working stack out of the box** — Next.js 16 + Fastify 5 + Zod, typed data,
+   testable handlers, env-based config, and a minimal demo so the whole thing
+   runs end-to-end on first `make`.
+2. **A guided workflow** — project skills (`/problem-framer`, `/solution-architect`,
+   `/api-contract`, …) and specialized subagents (`backend-node`, `frontend-nextjs`,
+   `qa-engineer`, …) that fill in the planning docs and implement the slice with you.
 
-```bash
-pnpm dlx shadcn@latest add button -c apps/web
-```
+> The shipped "Hackathon Idea Board" demo (post ideas, upvote, live leaderboard) is
+> a **placeholder to prove the stack works — not the real challenge.** See
+> [Replace the demo](#replace-the-demo) to swap in your own.
 
-This will place the ui components in the `packages/ui/src/components` directory.
+## Quick start
 
-## Using components
-
-To use the components in your app, import them from the `ui` package.
-
-```tsx
-import { Button } from "@workspace/ui/components/button";
-```
-
-## Reference demo (replaceable)
-
-The repo ships with a minimal **Hackathon Idea Board** demo so the kit runs end-to-end out of the box: post ideas, upvote them, watch a live leaderboard. It's a **placeholder to prove the stack works — not the real challenge.**
-
-Run it in two terminals:
+Requires Node ≥ 24 and pnpm 10.
 
 ```bash
-make dev-node   # API on http://localhost:8080
-make dev-web    # UI on http://localhost:3000
+make bootstrap    # install web + api dependencies + plannotator (plan & code review for agent)
+make dev-node     # API on http://localhost:8080
+make dev-web      # UI on http://localhost:3000  (in a second terminal)
 ```
 
-Open http://localhost:3000.
+Open <http://localhost:3000>.
 
-### Replace it with your real challenge
+Other targets: `make test`, `make build`, `make smoke`.
 
-The demo is confined to a small, easily-deleted file set:
+## Repository map
 
-- `apps/api/src/lib/store.ts`, `apps/api/src/lib/ideas.ts`
-- the `/api/ideas` routes in `apps/api/src/server.ts`
-- `apps/web/app/page.tsx`, `apps/web/lib/api.ts`
-- `apps/api/src/ideas.test.ts`
+| Path             | What's here                                                                                                           |
+| ---------------- | --------------------------------------------------------------------------------------------------------------------- |
+| `apps/api`       | Fastify backend. Entry `src/server.ts` exports `buildServer()` so routes are testable without booting a port.         |
+| `apps/web`       | Next.js 16 App Router frontend. Shared UI via the `@workspace/ui` package, Tailwind v4.                               |
+| `packages/`      | Shared workspace packages: `ui`, `eslint-config`, `typescript-config`.                                                |
+| `docs/`          | Planning & pitch artifacts: problem brief, architecture, API contract, task board, test plan, demo script, scorecard. |
+| `.claude/skills` | Reusable hackathon workflows, invoked with `/skill-name`.                                                             |
+| `.claude/agents` | Specialized subagents for backend, frontend, QA, strategy, and pitch.                                                 |
 
-Then run the workflow to fill the template docs for your real challenge:
+See `CLAUDE.md` for the operating rules the kit is built around, and
+`docs/architecture.md` for the stack details.
+
+## The hackathon workflow
+
+Run these in order from Claude Code in this repo — each writes or updates a doc
+in `docs/`, so the planning trail stays intact:
 
 ```text
 /problem-framer <your challenge>
@@ -52,4 +58,30 @@ Then run the workflow to fill the template docs for your real challenge:
 /implement-vertical-slice <slice>
 /test-fast
 /demo-story
+```
+
+## Replace the demo
+
+The placeholder demo is confined to a small, easily-deleted file set:
+
+- `apps/api/src/lib/store.ts`, `apps/api/src/lib/ideas.ts`
+- the `/api/ideas` routes in `apps/api/src/server.ts`
+- `apps/web/app/page.tsx`, `apps/web/lib/api.ts`
+- `apps/api/src/ideas.test.ts`
+
+Delete those, run `/problem-framer` with your real challenge, and the workflow
+rebuilds the slice on top of the same stack.
+
+## Adding UI components
+
+To add shadcn/ui components, run at the root of the repo:
+
+```bash
+pnpm dlx shadcn@latest add button -c apps/web
+```
+
+This places components in `packages/ui/src/components`. Use them in your app via:
+
+```tsx
+import { Button } from "@workspace/ui/components/button"
 ```

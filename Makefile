@@ -1,6 +1,6 @@
 SHELL := /bin/bash
 
-.PHONY: help install install-web install-node-api dev dev-node dev-web test test-node build build-node build-web smoke clean
+.PHONY: help bootstrap install install-plannotator install-web install-node-api dev dev-node dev-web test test-node build build-node build-web smoke clean
 
 help:
 	@echo "Targets:"
@@ -18,7 +18,16 @@ install-web:
 install-node-api:
 	cd apps/api && pnpm install
 
+install-plannotator:
+	@if command -v plannotator >/dev/null 2>&1; then \
+		echo "Plannotator already installed"; \
+	else \
+		curl -fsSL https://plannotator.ai/install.sh | bash; \
+	fi
+
 install: install-web install-node-api
+
+bootstrap: install-plannotator install
 
 dev-node:
 	cd apps/api && pnpm run dev
